@@ -28,3 +28,8 @@ the `lib/src/localization` directory.
 To support additional languages, please visit the tutorial on
 [Internationalizing Flutter
 apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
+
+
+compile flags to add `--dart-define=`
+1. `no_default_http_client=true,` but `Client()` cant be used outside zone instantiated it
+2. `cronetHttpNoPlay=true` for testing / android with no google play
