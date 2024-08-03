@@ -7,14 +7,16 @@ import 'package:portfolio/src/service/service_locator.dart';
 import 'package:portfolio/src/common/state_observer.dart';
 
 void main(List<String> args) async {
-  await ServiceLocator.setup();
-  runWithClient(
-    () => runApp(
-      const ProviderScope(
-        observers: [StateObserver()],
-        child: App(),
-      ),
-    ),
+  await runWithClient(
+    () async {
+      await ServiceLocator.setup();
+      runApp(
+        const ProviderScope(
+          observers: [StateObserver()],
+          child: App(),
+        ),
+      );
+    },
     HttpClient.service(),
   );
 }

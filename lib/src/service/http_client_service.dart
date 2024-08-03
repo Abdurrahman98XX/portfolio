@@ -116,42 +116,36 @@ class HttpClient implements BaseClient {
 }
 
 class AndroidHttpClient extends HttpClient {
+  factory AndroidHttpClient() => _i;
   const AndroidHttpClient._(super.provider);
-  static late final AndroidHttpClient? _i;
-  factory AndroidHttpClient() {
-    return _i ??= AndroidHttpClient._(
-      CronetClient.fromCronetEngine(
-        CronetEngine.build(
-          enableHttp2: true,
-          cacheMode: CacheMode.memory,
-          cacheMaxSize: HttpClient._maxCache,
-        ),
-        closeEngine: true,
+  static final _i = AndroidHttpClient._(
+    CronetClient.fromCronetEngine(
+      CronetEngine.build(
+        enableHttp2: true,
+        cacheMode: CacheMode.memory,
+        cacheMaxSize: HttpClient._maxCache,
       ),
-    );
-  }
+      closeEngine: true,
+    ),
+  );
 }
 
 class CupertinoHttpClient extends HttpClient {
+  factory CupertinoHttpClient() => _i;
   const CupertinoHttpClient._(super.provider);
-  static late final CupertinoHttpClient? _i;
-  factory CupertinoHttpClient() {
-    return _i ??= CupertinoHttpClient._(
-      CupertinoClient.fromSessionConfiguration(
-        URLSessionConfiguration.ephemeralSessionConfiguration()
-          ..cache = URLCache.withCapacity(
-            memoryCapacity: HttpClient._maxCache,
-          )
-          ..allowsCellularAccess = true,
-      ),
-    );
-  }
+  static final _i = CupertinoHttpClient._(
+    CupertinoClient.fromSessionConfiguration(
+      URLSessionConfiguration.ephemeralSessionConfiguration()
+        ..cache = URLCache.withCapacity(
+          memoryCapacity: HttpClient._maxCache,
+        )
+        ..allowsCellularAccess = true,
+    ),
+  );
 }
 
 class BrowserHttpClient extends HttpClient {
+  factory BrowserHttpClient() => _i;
   const BrowserHttpClient._(super.provider);
-  static late final BrowserHttpClient? _i;
-  factory BrowserHttpClient() {
-    return _i ??= BrowserHttpClient._(FetchClient());
-  }
+  static final _i = BrowserHttpClient._(FetchClient());
 }
