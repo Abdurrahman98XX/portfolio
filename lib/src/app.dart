@@ -9,7 +9,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      restorationScopeId: 'app',
+      restorationScopeId: ServiceLocator.id,
+      // TODO: theme controller
       theme: ThemeData(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
