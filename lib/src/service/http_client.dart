@@ -8,21 +8,22 @@ import 'package:fetch_client/fetch_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
-class HttpClient implements BaseClient {
-  const HttpClient(this.provider);
+Client Function() service() {
+  try {
+    if (kIsWeb) return BrowserHttpClient.new;
+    if (Platform.isAndroid) return AndroidHttpClient.new;
+    if (Platform.isIOS || Platform.isMacOS) return CupertinoHttpClient.new;
+  } catch (error) {
+    // TODO log
+    log('$error');
+  }
+  return Client.new;
+}
+
+class _HttpClient implements BaseClient {
+  const _HttpClient(this.provider);
   final Client provider;
   static const _maxCache = 1024 * 1024 * 3;
-  static Client Function() service() {
-    try {
-      if (kIsWeb) return BrowserHttpClient.new;
-      if (Platform.isAndroid) return AndroidHttpClient.new;
-      if (Platform.isIOS || Platform.isMacOS) return CupertinoHttpClient.new;
-    } catch (error) {
-      // TODO log
-      log('$error');
-    }
-    return Client.new;
-  }
 
   @override
   Future<StreamedResponse> send(BaseRequest request) {
@@ -115,7 +116,7 @@ class HttpClient implements BaseClient {
   }
 }
 
-class AndroidHttpClient extends HttpClient {
+class AndroidHttpClient extends _HttpClient {
   factory AndroidHttpClient() => _i;
   const AndroidHttpClient._(super.provider);
   static final _i = AndroidHttpClient._(
@@ -123,28 +124,28 @@ class AndroidHttpClient extends HttpClient {
       CronetEngine.build(
         enableHttp2: true,
         cacheMode: CacheMode.memory,
-        cacheMaxSize: HttpClient._maxCache,
+        cacheMaxSize: _HttpClient._maxCache,
       ),
       closeEngine: true,
     ),
   );
 }
 
-class CupertinoHttpClient extends HttpClient {
+class CupertinoHttpClient extends _HttpClient {
   factory CupertinoHttpClient() => _i;
   const CupertinoHttpClient._(super.provider);
   static final _i = CupertinoHttpClient._(
     CupertinoClient.fromSessionConfiguration(
       URLSessionConfiguration.ephemeralSessionConfiguration()
         ..cache = URLCache.withCapacity(
-          memoryCapacity: HttpClient._maxCache,
+          memoryCapacity: _HttpClient._maxCache,
         )
         ..allowsCellularAccess = true,
     ),
   );
 }
 
-class BrowserHttpClient extends HttpClient {
+class BrowserHttpClient extends _HttpClient {
   factory BrowserHttpClient() => _i;
   const BrowserHttpClient._(super.provider);
   static final _i = BrowserHttpClient._(FetchClient());

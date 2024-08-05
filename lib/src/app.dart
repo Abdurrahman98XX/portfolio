@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       supportedLocales: const [Locale('en', '')],
       routerDelegate: ServiceLocator.router.routerDelegate,
-      // scaffoldMessengerKey: ServiceLocator.scaffoldMessengerKey,
+      scaffoldMessengerKey: ServiceLocator.scaffoldMessengerKey,
       backButtonDispatcher: ServiceLocator.router.backButtonDispatcher,
       routeInformationParser: ServiceLocator.router.routeInformationParser,
       routeInformationProvider: ServiceLocator.router.routeInformationProvider,
