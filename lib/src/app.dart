@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:portfolio/src/common/const.dart';
 import 'package:portfolio/src/service/service_locator.dart';
+import 'localization/shit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // TODO: theme controller
     return MaterialApp.router(
-      restorationScopeId: ServiceLocator.id,
-      // TODO: theme controller
+      restorationScopeId: Const.id,
       theme: ThemeData(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
       supportedLocales: const [Locale('en', '')],
       routerDelegate: ServiceLocator.router.routerDelegate,
-      scaffoldMessengerKey: ServiceLocator.scaffoldMessengerKey,
+      scaffoldMessengerKey: Const.scaffoldMessengerKey,
       backButtonDispatcher: ServiceLocator.router.backButtonDispatcher,
       routeInformationParser: ServiceLocator.router.routeInformationParser,
       routeInformationProvider: ServiceLocator.router.routeInformationProvider,

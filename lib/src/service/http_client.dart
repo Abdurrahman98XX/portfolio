@@ -7,12 +7,13 @@ import 'package:cupertino_http/cupertino_http.dart';
 import 'package:fetch_client/fetch_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
+import 'package:portfolio/src/common/const.dart';
 
 Client Function() service() {
   try {
-    if (kIsWeb) return BrowserHttpClient.new;
-    if (Platform.isAndroid) return AndroidHttpClient.new;
-    if (Platform.isIOS || Platform.isMacOS) return CupertinoHttpClient.new;
+    if (Const.isWeb) return _BrowserHttpClient.new;
+    if (Platform.isAndroid) return _AndroidHttpClient.new;
+    if (Platform.isIOS || Platform.isMacOS) return _CupertinoHttpClient.new;
   } catch (error) {
     // TODO log
     log('$error');
@@ -116,10 +117,10 @@ class _HttpClient implements BaseClient {
   }
 }
 
-class AndroidHttpClient extends _HttpClient {
-  factory AndroidHttpClient() => _i;
-  const AndroidHttpClient._(super.provider);
-  static final _i = AndroidHttpClient._(
+class _AndroidHttpClient extends _HttpClient {
+  factory _AndroidHttpClient() => _i;
+  const _AndroidHttpClient._(super.provider);
+  static final _i = _AndroidHttpClient._(
     CronetClient.fromCronetEngine(
       CronetEngine.build(
         enableHttp2: true,
@@ -131,10 +132,10 @@ class AndroidHttpClient extends _HttpClient {
   );
 }
 
-class CupertinoHttpClient extends _HttpClient {
-  factory CupertinoHttpClient() => _i;
-  const CupertinoHttpClient._(super.provider);
-  static final _i = CupertinoHttpClient._(
+class _CupertinoHttpClient extends _HttpClient {
+  factory _CupertinoHttpClient() => _i;
+  const _CupertinoHttpClient._(super.provider);
+  static final _i = _CupertinoHttpClient._(
     CupertinoClient.fromSessionConfiguration(
       URLSessionConfiguration.ephemeralSessionConfiguration()
         ..cache = URLCache.withCapacity(
@@ -145,8 +146,8 @@ class CupertinoHttpClient extends _HttpClient {
   );
 }
 
-class BrowserHttpClient extends _HttpClient {
-  factory BrowserHttpClient() => _i;
-  const BrowserHttpClient._(super.provider);
-  static final _i = BrowserHttpClient._(FetchClient());
+class _BrowserHttpClient extends _HttpClient {
+  factory _BrowserHttpClient() => _i;
+  const _BrowserHttpClient._(super.provider);
+  static final _i = _BrowserHttpClient._(FetchClient());
 }
