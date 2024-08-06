@@ -1,13 +1,12 @@
-// ignore_for_file: avoid_print
+import 'dart:io';
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
-import 'package:cronet_http/cronet_http.dart';
-import 'package:cupertino_http/cupertino_http.dart';
-import 'package:fetch_client/fetch_client.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
+import 'package:flutter/foundation.dart';
+import 'package:cronet_http/cronet_http.dart';
+import 'package:fetch_client/fetch_client.dart';
 import 'package:portfolio/src/common/const.dart';
+import 'package:cupertino_http/cupertino_http.dart';
 
 Client Function() service() {
   try {
