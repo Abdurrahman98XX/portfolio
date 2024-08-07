@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/feature/theme_mode/theme_mode_entity.dart';
+import 'package:portfolio/src/module/theme_mode/theme_mode_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'theme_mode_controller.g.dart';
 

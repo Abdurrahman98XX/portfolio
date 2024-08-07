@@ -11,7 +11,7 @@ Stream<Color> systemColorRefrsher(SystemColorRefrsherRef ref) async* {
     yield* SystemTheme.onChange.cast<Color>();
   } else {
     final prev = SystemTheme.accentColor.accent.value;
-    await Future.delayed(const Duration(milliseconds: 1000 ~/ 20));
+    await Future.delayed(const Duration(milliseconds: 100));
     await SystemTheme.accentColor.load();
     if (prev != SystemTheme.accentColor.accent.value) {
       yield SystemTheme.accentColor.accent;

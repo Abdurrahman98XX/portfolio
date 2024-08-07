@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/src/common/const.dart';
-import 'package:portfolio/src/feature/theme_mode/theme_mode_controller.dart';
+import 'package:portfolio/src/module/theme_mode/theme_mode_controller.dart';
 import 'package:portfolio/src/service/service_locator.dart';
 import 'package:portfolio/src/localization/shit.dart';
 

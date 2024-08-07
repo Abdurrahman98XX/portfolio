@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
-import 'package:portfolio/src/feature/base_entity/base_entity.dart';
+import 'package:portfolio/src/module/base_entity/base_entity.dart';
 part 'theme_mode_entity.g.dart';
 
 @jsonC
