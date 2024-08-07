@@ -6,6 +6,23 @@ GoRouter get _router {
     debugLogDiagnostics: true,
     restorationScopeId: Const.id,
     navigatorKey: Const.navigatorKey,
-    routes: [],
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Home'),
+            ),
+            body: Center(
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('About'),
+              ),
+            ),
+          );
+        },
+      ),
+    ],
   );
 }

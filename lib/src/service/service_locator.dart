@@ -15,7 +15,6 @@ abstract interface class ServiceLocator {
   static final getIt = GetIt.instance;
   static Future<void> setup() async {
     WidgetsFlutterBinding.ensureInitialized();
-    // exclude Firebase initialization for Linux
     if ((Platform.isLinux && Const.isWeb) || !Platform.isLinux) {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,

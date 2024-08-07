@@ -7,7 +7,7 @@ part of 'system_color_controller.dart';
 // **************************************************************************
 
 String _$systemColorRefrsherHash() =>
-    r'6ba082699ac03174e32e0d679f02c92a933f5070';
+    r'b19e44ca5c8674959c982356637b2cd691da33b2';
 
 /// See also [systemColorRefrsher].
 @ProviderFor(systemColorRefrsher)
@@ -23,7 +23,7 @@ final systemColorRefrsherProvider = StreamProvider<Color>.internal(
 
 typedef SystemColorRefrsherRef = StreamProviderRef<Color>;
 String _$systemColorAbilityHash() =>
-    r'a92f3bb4f5ae2c316256113477e9600e33f5be3a';
+    r'c054a861a2090b0078a134459a7cd67dd69768e8';
 
 /// See also [systemColorAbility].
 @ProviderFor(systemColorAbility)
