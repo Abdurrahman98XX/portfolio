@@ -13,9 +13,8 @@ class App extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final themeMode = ref.watch(themeModeControllerProvider).themeMode;
-        final color = ref.watch(systemColorRefrsherProvider).value;
-        final colorAbility = ref.watch(systemColorAbilityProvider);
-        final colorSeed = colorAbility && color != null ? color : Colors.brown;
+        final colorSeed =
+            ref.watch(systemColorRefrsherProvider).value ?? Colors.brown;
         return MaterialApp.router(
           restorationScopeId: Const.id,
           theme: ThemeData(

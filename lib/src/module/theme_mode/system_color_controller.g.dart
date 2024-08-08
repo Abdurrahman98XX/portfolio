@@ -7,7 +7,7 @@ part of 'system_color_controller.dart';
 // **************************************************************************
 
 String _$systemColorRefrsherHash() =>
-    r'b19e44ca5c8674959c982356637b2cd691da33b2';
+    r'4b6b74cf199084f8213477722f5bb5c20301fe78';
 
 /// See also [systemColorRefrsher].
 @ProviderFor(systemColorRefrsher)

@@ -10,7 +10,7 @@ class StateObserver implements ProviderObserver {
     Object? value,
     ProviderContainer container,
   ) {
-    log('Initialized: $value', name: provider.name ?? '');
+    log('🔜✅✅✅🔙 $value', name: provider.name ?? '');
   }
 
   @override
@@ -18,7 +18,7 @@ class StateObserver implements ProviderObserver {
     ProviderBase<Object?> provider,
     ProviderContainer container,
   ) {
-    log('Disposed', name: provider.name ?? '');
+    log('🔜❌❌❌🔙', name: provider.name ?? '');
   }
 
   @override
@@ -29,7 +29,7 @@ class StateObserver implements ProviderObserver {
     ProviderContainer container,
   ) {
     log(
-      'Update: $previousValue ===> $newValue',
+      '🔜♻️♻️♻️🔙\n$previousValue🔚\n$newValue🔚',
       name: provider.name ?? '',
     );
   }
@@ -42,7 +42,7 @@ class StateObserver implements ProviderObserver {
     ProviderContainer container,
   ) {
     log(
-      'Error',
+      '🔜⁉️⁉️⁉️🔙',
       name: provider.name ?? '',
       error: error,
       stackTrace: stackTrace,
