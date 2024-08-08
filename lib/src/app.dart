@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/const.dart';
 import 'package:portfolio/src/localization/shit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/src/module/theme/controller/auto_system_color_controller.dart';
 import 'package:portfolio/src/service/service_locator.dart';
-import 'package:portfolio/src/module/theme_mode/theme_mode_controller.dart';
-import 'package:portfolio/src/module/theme_mode/system_color_controller.dart';
+import 'package:portfolio/src/module/theme/controller/theme_mode_controller.dart';
+import 'package:system_theme/system_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -13,21 +14,21 @@ class App extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final themeMode = ref.watch(themeModeControllerProvider).themeMode;
-        final colorSeed =
-            ref.watch(systemColorRefrsherProvider).value ?? Colors.brown;
+        // ignore: unused_local_variable
+        final s = ref.watch(autoSystemColorProvider).value;
         return MaterialApp.router(
           restorationScopeId: Const.id,
           theme: ThemeData(
             brightness: Brightness.light,
             colorScheme: ColorScheme.fromSeed(
-              seedColor: colorSeed,
+              seedColor: SystemTheme.accentColor.accent,
               brightness: Brightness.light,
             ),
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
             colorScheme: ColorScheme.fromSeed(
-              seedColor: colorSeed,
+              seedColor: SystemTheme.accentColor.accent,
               brightness: Brightness.dark,
             ),
           ),
