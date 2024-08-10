@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart';
@@ -10,9 +9,9 @@ import 'package:cupertino_http/cupertino_http.dart';
 
 Client Function() service() {
   try {
-    if (Const.isWeb) return _BrowserHttpClient.new;
-    if (Platform.isAndroid) return _AndroidHttpClient.new;
-    if (Platform.isIOS || Platform.isMacOS) return _CupertinoHttpClient.new;
+    if (OS.isWeb) return _BrowserHttpClient.new;
+    if (OS.isAndroid) return _AndroidHttpClient.new;
+    if (OS.isIOS || OS.isMacOS) return _CupertinoHttpClient.new;
   } catch (error) {
     // TODO log
     log('$error');

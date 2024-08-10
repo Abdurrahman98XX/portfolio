@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:system_theme/system_theme.dart';
 import 'package:portfolio/src/common/const.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:system_theme/system_theme.dart';
 part 'auto_system_color_controller.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -25,8 +24,8 @@ Stream<Color> autoSystemColor(AutoSystemColorRef ref) async* {
 
 Stream<Color> _autoSystemColor({int millis = 250}) async* {
   while (true) {
-    if (Platform.isWindows && !Const.isWeb) {
-      yield* SystemTheme.onChange.cast<Color>();
+    if (OS.isWindows) {
+      yield* SystemTheme.onChange.map((c) => c.accent);
     } else {
       yield SystemTheme.accentColor.accent;
       await SystemTheme.accentColor.load();

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ abstract interface class ServiceLocator {
   static final getIt = GetIt.instance;
   static Future<void> setup() async {
     WidgetsFlutterBinding.ensureInitialized();
-    if ((Platform.isLinux && Const.isWeb) || !Platform.isLinux) {
+    if (!OS.isLinux) {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );

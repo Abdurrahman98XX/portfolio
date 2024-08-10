@@ -3,10 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
 part 'base_entity.g.dart';
 
-// TODO
-// HACK
-// FIXME
-// UNDONE
+// TODO UNDONE HACK FIXME
 // CheckedFromJsonException is thrown when the JSON is not valid
 // UnrecognizedKeysException is thrown when the JSON has unrecognized keys
 const jsonC = JsonSerializable(converters: converters);
