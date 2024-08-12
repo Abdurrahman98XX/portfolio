@@ -17,7 +17,7 @@ import 'package:portfolio/src/common/const.dart';
 /// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    if (OS.isWeb) return web;
+    if (KPlatform.isWeb) return web;
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
@@ -84,5 +84,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'atumra-portfolio.appspot.com',
     measurementId: 'G-Y2JL4MZVCY',
   );
-
 }

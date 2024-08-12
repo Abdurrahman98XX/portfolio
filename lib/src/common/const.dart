@@ -7,17 +7,14 @@ abstract interface class Const {
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 }
 
-class OS {
+class KPlatform {
   static const isWeb = kIsWeb || kIsWasm;
   static final isMobile = isAndroid || isIOS;
   static final isDesktop = isMacOS || isWindows || isLinux;
-  static final isIOS = !isWeb && defaultTargetPlatform == TargetPlatform.iOS;
-  static final isAndroid =
-      !isWeb && defaultTargetPlatform == TargetPlatform.android;
-  static final isMacOS =
-      !isWeb && defaultTargetPlatform == TargetPlatform.macOS;
-  static final isLinux =
-      !isWeb && defaultTargetPlatform == TargetPlatform.linux;
-  static final isWindows =
-      !isWeb && defaultTargetPlatform == TargetPlatform.windows;
+  static final isIOS = !isWeb && name == TargetPlatform.iOS;
+  static final isAndroid = !isWeb && name == TargetPlatform.android;
+  static final isMacOS = !isWeb && name == TargetPlatform.macOS;
+  static final isLinux = !isWeb && name == TargetPlatform.linux;
+  static final isWindows = !isWeb && name == TargetPlatform.windows;
+  static final name = defaultTargetPlatform;
 }

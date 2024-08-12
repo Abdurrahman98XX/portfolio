@@ -6,8 +6,12 @@ part 'base_entity.g.dart';
 // TODO UNDONE HACK FIXME
 // CheckedFromJsonException is thrown when the JSON is not valid
 // UnrecognizedKeysException is thrown when the JSON has unrecognized keys
+/// always use this annotation with [BaseEntity]
 const jsonC = JsonSerializable(converters: converters);
 
+/// This class provides common properties and methods that are shared by all entities.
+///
+/// It serves as a base class for other entity classes in the application.
 @JsonSerializable(
   createFactory: false,
   ignoreUnannotated: true,
@@ -30,12 +34,39 @@ abstract class BaseEntity extends Equatable {
     DateTime? createdAt,
     DateTime? modifiedAt,
   });
+
+  /// The type of the entity
   @JsonKey(includeToJson: true)
-  final String type, name, id, vId;
+  final String type;
+
+  /// The name of the entity
   @JsonKey(includeToJson: true)
-  final DateTime createdAt, modifiedAt;
+  final String name;
+
+  /// The unique identifier of the entity
+  @JsonKey(includeToJson: true)
+  final String id;
+
+  /// identifier that changes when the entity is modified
+  @JsonKey(includeToJson: true)
+  final String vId;
+
+  /// The date and time when the entity was created
+  @JsonKey(includeToJson: true)
+  final DateTime createdAt;
+
+  /// The date and time when the entity was last modified
+  @JsonKey(includeToJson: true)
+  final DateTime modifiedAt;
+
   @override
   List get props => [...equality, name, id, vId, type, createdAt, modifiedAt];
+
+  /// define every property that is not in the [props] list
+  ///
+  /// this is used to in contrast with equatable package
   List get equality;
+
+  /// serializes object to a map (json like)
   Map<String, dynamic> toJson() => _$BaseEntityToJson(this);
 }

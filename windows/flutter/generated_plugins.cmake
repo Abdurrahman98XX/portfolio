@@ -5,7 +5,9 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   firebase_core
   screen_retriever
+  share_plus
   system_theme
+  url_launcher_windows
   window_manager
 )
 

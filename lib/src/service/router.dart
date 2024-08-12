@@ -6,6 +6,7 @@ GoRouter get _router {
     debugLogDiagnostics: true,
     restorationScopeId: Const.id,
     navigatorKey: Const.navigatorKey,
+    observers: [TalkerRouteObserver(ServiceLocator.logger)],
     routes: [
       GoRoute(
         path: '/',

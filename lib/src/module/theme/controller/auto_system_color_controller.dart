@@ -24,7 +24,7 @@ Stream<Color> autoSystemColor(AutoSystemColorRef ref) async* {
 
 Stream<Color> _autoSystemColor({int millis = 250}) async* {
   while (true) {
-    if (OS.isWindows) {
+    if (KPlatform.isWindows) {
       yield* SystemTheme.onChange.map((c) => c.accent);
     } else {
       yield SystemTheme.accentColor.accent;
