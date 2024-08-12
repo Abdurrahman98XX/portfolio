@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "400437740389",
+    "project_id": "atumra-portfolio-6fb12",
+    "storage_bucket": "atumra-portfolio-6fb12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400437740389:android:805d44557706f29e47978c",
+        "android_client_info": {
+          "package_name": "com.atumra.p"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtASyL6__ErnceZV_tLtzjIWrK_ldNUBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400437740389:android:3a1b62d96c6b01b047978c",
+        "android_client_info": {
+          "package_name": "com.atumra.portfolio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtASyL6__ErnceZV_tLtzjIWrK_ldNUBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

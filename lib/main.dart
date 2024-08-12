@@ -4,7 +4,6 @@ import 'package:http/http.dart';
 import 'package:portfolio/src/app.dart';
 import 'package:portfolio/src/service/client.dart';
 import 'package:portfolio/src/service/service_locator.dart';
-// import 'package:portfolio/src/common/state_observer.dart';
 import 'package:talker_riverpod_logger/talker_riverpod_logger_observer.dart';
 
 void main(List<String> args) async {
@@ -13,10 +12,7 @@ void main(List<String> args) async {
       await ServiceLocator.setup();
       return runApp(
         ProviderScope(
-          observers: [
-            // const StateObserver(),
-            TalkerRiverpodObserver(talker: ServiceLocator.logger),
-          ],
+          observers: [TalkerRiverpodObserver(talker: ServiceLocator.logger)],
           child: const App(),
         ),
       );

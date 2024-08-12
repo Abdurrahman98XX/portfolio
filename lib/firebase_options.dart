@@ -40,48 +40,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAq2WcddTEAKZIllW6bJ9V01UdOtXxcn_c',
-    appId: '1:814750292363:web:3cda9fc83245f57659f78e',
-    messagingSenderId: '814750292363',
-    projectId: 'atumra-portfolio',
-    authDomain: 'atumra-portfolio.firebaseapp.com',
-    storageBucket: 'atumra-portfolio.appspot.com',
-    measurementId: 'G-6TP3HRM412',
+    apiKey: 'AIzaSyDD-5pjDmqD9YZmtDKw-8iWnZjdOhPKT3U',
+    appId: '1:400437740389:web:6b9456c5cb7df97447978c',
+    messagingSenderId: '400437740389',
+    projectId: 'atumra-portfolio-6fb12',
+    authDomain: 'atumra-portfolio-6fb12.firebaseapp.com',
+    storageBucket: 'atumra-portfolio-6fb12.appspot.com',
+    measurementId: 'G-PWF8X5MDZ3',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB1104VrLezsbsAkVuwgExWv5YFpVYBPnc',
-    appId: '1:814750292363:android:2bcfe7c89530245a59f78e',
-    messagingSenderId: '814750292363',
-    projectId: 'atumra-portfolio',
-    storageBucket: 'atumra-portfolio.appspot.com',
+    apiKey: 'AIzaSyAtASyL6__ErnceZV_tLtzjIWrK_ldNUBY',
+    appId: '1:400437740389:android:3a1b62d96c6b01b047978c',
+    messagingSenderId: '400437740389',
+    projectId: 'atumra-portfolio-6fb12',
+    storageBucket: 'atumra-portfolio-6fb12.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCDhHYfBYcxlg1pR8ZgnjMdtLHk40P4sJY',
-    appId: '1:814750292363:ios:b314490cd5d4344e59f78e',
-    messagingSenderId: '814750292363',
-    projectId: 'atumra-portfolio',
-    storageBucket: 'atumra-portfolio.appspot.com',
+    apiKey: 'AIzaSyCUuCW_dmcSPLKNFw8Y7MqQti-PgSSCaOY',
+    appId: '1:400437740389:ios:241b2e24a2009f1547978c',
+    messagingSenderId: '400437740389',
+    projectId: 'atumra-portfolio-6fb12',
+    storageBucket: 'atumra-portfolio-6fb12.appspot.com',
     iosBundleId: 'com.atumra.portfolio.portfolio',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCDhHYfBYcxlg1pR8ZgnjMdtLHk40P4sJY',
-    appId: '1:814750292363:ios:b314490cd5d4344e59f78e',
-    messagingSenderId: '814750292363',
-    projectId: 'atumra-portfolio',
-    storageBucket: 'atumra-portfolio.appspot.com',
+    apiKey: 'AIzaSyCUuCW_dmcSPLKNFw8Y7MqQti-PgSSCaOY',
+    appId: '1:400437740389:ios:241b2e24a2009f1547978c',
+    messagingSenderId: '400437740389',
+    projectId: 'atumra-portfolio-6fb12',
+    storageBucket: 'atumra-portfolio-6fb12.appspot.com',
     iosBundleId: 'com.atumra.portfolio.portfolio',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAq2WcddTEAKZIllW6bJ9V01UdOtXxcn_c',
-    appId: '1:814750292363:web:4a95ecba253eee3159f78e',
-    messagingSenderId: '814750292363',
-    projectId: 'atumra-portfolio',
-    authDomain: 'atumra-portfolio.firebaseapp.com',
-    storageBucket: 'atumra-portfolio.appspot.com',
-    measurementId: 'G-Y2JL4MZVCY',
+    apiKey: 'AIzaSyDD-5pjDmqD9YZmtDKw-8iWnZjdOhPKT3U',
+    appId: '1:400437740389:web:2cc232d5d775ee6347978c',
+    messagingSenderId: '400437740389',
+    projectId: 'atumra-portfolio-6fb12',
+    authDomain: 'atumra-portfolio-6fb12.firebaseapp.com',
+    storageBucket: 'atumra-portfolio-6fb12.appspot.com',
+    measurementId: 'G-Q307R6MMHK',
   );
+
 }

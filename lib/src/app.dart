@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/const.dart';
-import 'package:portfolio/src/localization/shit.dart';
+import 'package:portfolio/src/localization/localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/src/module/theme/controller/auto_system_color_controller.dart';
 import 'package:portfolio/src/service/service_locator.dart';
+import 'package:portfolio/src/module/theme/controller/auto_system_color_controller.dart';
 import 'package:portfolio/src/module/theme/controller/theme_mode_controller.dart';
 
 class App extends StatelessWidget {
