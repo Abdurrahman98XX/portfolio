@@ -30,6 +30,7 @@ dependencies:
   macos_ui: ^2.0.7
   path_provider: ^2.1.4
   riverpod_annotation: ^2.3.5
+  shared_preferences: ^2.3.1
   system_theme: ^3.0.0
   talker_flutter: ^4.1.2
   talker_riverpod_logger: ^4.4.0

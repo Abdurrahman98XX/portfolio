@@ -1,9 +1,9 @@
-import 'dart:developer';
 import 'package:http/http.dart';
 import 'package:cronet_http/cronet_http.dart';
 import 'package:fetch_client/fetch_client.dart';
 import 'package:portfolio/src/common/const.dart';
 import 'package:cupertino_http/cupertino_http.dart';
+import 'package:portfolio/src/service/service_locator.dart';
 
 abstract class KClient with BaseClient {
   const KClient(this.provider);
@@ -14,9 +14,8 @@ abstract class KClient with BaseClient {
       if (KPlatform.isWeb) return _BrowserHttpClient.new;
       if (KPlatform.isAndroid) return _AndroidHttpClient.new;
       if (KPlatform.isIOS || KPlatform.isMacOS) return _CupertinoHttpClient.new;
-    } catch (error) {
-      // TODO log
-      log('$error');
+    } catch (e, st) {
+      ServiceLocator.logger.error('msg', e, st);
     }
     return Client.new;
   }
