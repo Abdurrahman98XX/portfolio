@@ -29,30 +29,29 @@ abstract interface class ServiceLocator {
     await SystemTheme.accentColor.load();
     EquatableConfig.stringify = true;
     // TODO: always register services here
-    getIt.registerSingleton(SharedPreferencesAsync());
-    getIt.registerSingleton(
-      _router,
+    getIt.registerLazySingleton(() => SharedPreferencesAsync());
+    getIt.registerLazySingleton(
+      () => _router,
       dispose: (instance) => instance.dispose(),
     );
-    getIt.registerSingleton(
-      Client(),
+    getIt.registerLazySingleton(
+      () => Client(),
       dispose: (instance) => instance.close(),
     );
-    getIt.registerSingleton(
-      TalkerFlutter.init(),
+    getIt.registerLazySingleton(
+      () => TalkerFlutter.init(),
       dispose: (instance) => instance.disable(),
     );
-    getIt.registerSingleton(
-      WorkerPlugin(),
+    getIt.registerLazySingleton(
+      () => WorkerPlugin(),
       dispose: (instance) async => (await instance.controller).kill(),
     );
     await workerPlugin.controller;
   }
 
-  static GoRouter get router => getIt.get<GoRouter>();
-  static Client get client => getIt.get<Client>();
-  static WorkerPlugin get workerPlugin => getIt.get<WorkerPlugin>();
-  static Talker get logger => getIt.get<Talker>();
-  static SharedPreferencesAsync get storage =>
-      getIt.get<SharedPreferencesAsync>();
+  static final router = getIt.get<GoRouter>();
+  static final client = getIt.get<Client>();
+  static final workerPlugin = getIt.get<WorkerPlugin>();
+  static final logger = getIt.get<Talker>();
+  static final storage = getIt.get<SharedPreferencesAsync>();
 }

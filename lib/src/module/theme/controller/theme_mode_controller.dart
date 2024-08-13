@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/module/theme/model/theme_mode_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -28,4 +29,9 @@ class ThemeModeController extends _$ThemeModeController {
   void lightMode() => update(ThemeMode.light);
 
   void systemMode() => update(ThemeMode.system);
+
+  void toggle() => _light ? darkMode() : lightMode();
 }
+
+bool get _light =>
+    PlatformDispatcher.instance.platformBrightness == Brightness.light;

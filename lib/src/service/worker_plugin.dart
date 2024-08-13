@@ -6,7 +6,9 @@ import 'package:portfolio/src/service/service_locator.dart';
 
 /// a singleton class to instantiate an isolate works with plugins
 class WorkerPlugin {
-  WorkerPlugin._();
+  WorkerPlugin._() {
+    _spawn();
+  }
   factory WorkerPlugin() => _i;
   static final _i = WorkerPlugin._();
 
@@ -18,23 +20,25 @@ class WorkerPlugin {
   /// controls the plugin's isolate life cycle
   late final Future<Isolate> controller = _spawn();
 
-  /// to get responses from plugin isolate
-  final mainReceivePort = ReceivePort();
+  /// plugin isolate's response reciever
+  final mainReceivePort = ReceivePort()..asBroadcastStream();
 
   // spawn the plugin's isolate
   Future<Isolate> _spawn() {
     // instantiates a plugin isolate token
     final rootToken = RootIsolateToken.instance!;
     // handle responses from plugin isolate
-    mainReceivePort.listen(_handlePluginWorkerResponses);
+    mainReceivePort.listen(_mainIsolateResponseHandler);
     // spawn the plugin isolate
     return Isolate.spawn(
       // final worker = await Isolate.spawn(
       // plugin isolate's requests initializer and requests handler
-      _pluginWorker,
+      _workerIsolateRequestHandler,
       // main isolate sends its root token and send port to get
       // responses from plugin's isolate as the first message
       {'rootToken': rootToken, 'mainSendPort': mainReceivePort.sendPort},
+      // name
+      debugName: '$runtimeType',
     );
     // sets plugin's isolate sync object to a public controller
     // to manage it's life cycle
@@ -42,7 +46,7 @@ class WorkerPlugin {
   }
 
   // plugin isolate's requests initializer and requests handler
-  static void _pluginWorker(
+  static void _workerIsolateRequestHandler(
     // the type of the first request (message)
     Map<String, Object> message,
   ) {
@@ -61,7 +65,7 @@ class WorkerPlugin {
   }
 
   // handles what main receives
-  void _handlePluginWorkerResponses(dynamic message) {
+  void _mainIsolateResponseHandler(dynamic message) {
     // when getting plugin worker's first message
     if (message is SendPort) {
       // assign the main isolate's send port to be used when sending requests
@@ -70,12 +74,12 @@ class WorkerPlugin {
       _isolateReady.complete();
     }
     // TODO: handle data (with stream for example)
+    ServiceLocator.logger.log('after handling => ${message.runtimeType}');
   }
 
   /// a function that takes undecoded
   /// json and sends a request to decode it
   Future<void> parseJson(String message) async {
-    ServiceLocator.logger.debug('parseJson started');
     await _isolateReady.future;
     _mainSendPort.send(message);
   }
