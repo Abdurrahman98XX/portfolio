@@ -1,39 +1,47 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:isolate';
 
 class Worker {
-  late SendPort _sendPort;
+  Worker({required this.handleRequest, required this.handleResponse}) {
+    responseStream.listen(_handleWorkerResponses);
+  }
+  late final ReceivePort _workerReceivePort;
+  final _mainReceivePort = ReceivePort();
   final Completer<void> _isolateReady = Completer.sync();
+  late final responseStream = _mainReceivePort.asBroadcastStream();
+  final void Function(dynamic request, SendPort workerSendPort) handleRequest;
+  final void Function(dynamic response) handleResponse;
+  late final controller = Isolate.spawn(
+    _handleMainRequestsShadow,
+    _mainReceivePort,
+  );
 
-  Future<void> spawn() async {
-    final receivePort = ReceivePort();
-    receivePort.listen(_handleResponsesFromIsolate);
-    await Isolate.spawn(_startRemoteIsolate, receivePort.sendPort);
+  void _handleMainRequestsShadow(ReceivePort mainReceivePort) {
+    return _handleMainRequests(
+        mainReceivePort, (r, sp) => handleRequest(r, sp));
   }
 
-  void _handleResponsesFromIsolate(dynamic message) {
-    if (message is SendPort) {
-      _sendPort = message;
+  static void _handleMainRequests(
+    ReceivePort mainReceivePort,
+    void Function(dynamic, SendPort) onRequest,
+  ) {
+    final workerReceivePort = ReceivePort();
+    mainReceivePort.sendPort.send(workerReceivePort);
+    workerReceivePort.listen(
+      (requset) => onRequest(requset, workerReceivePort.sendPort),
+    );
+  }
+
+  void _handleWorkerResponses(response) {
+    if (!_isolateReady.isCompleted) {
+      _workerReceivePort = response as ReceivePort;
       _isolateReady.complete();
-    } else if (message is Map<String, dynamic>) {
-      print(message);
     }
+    return handleResponse(response);
   }
 
-  static void _startRemoteIsolate(SendPort port) {
-    final receivePort = ReceivePort();
-    port.send(receivePort.sendPort);
-    receivePort.listen((dynamic message) async {
-      if (message is String) {
-        final transformed = jsonDecode(message);
-        port.send(transformed);
-      }
-    });
-  }
-
-  Future<void> parseJson(String message) async {
+  Future<void> send(message) async {
     await _isolateReady.future;
-    _sendPort.send(message);
+    _workerReceivePort.sendPort.send(message);
   }
 }

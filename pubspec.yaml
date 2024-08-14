@@ -35,7 +35,6 @@ dependencies:
   talker_flutter: ^4.1.2
   talker_riverpod_logger: ^4.4.0
   url_launcher: ^6.3.0
-  worker_manager: ^7.0.3
   yaru: ^4.0.0
 
 dev_dependencies:
