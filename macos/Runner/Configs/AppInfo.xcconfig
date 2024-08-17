@@ -8,7 +8,7 @@
 PRODUCT_NAME = portfolio
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.atumra.portfolio.portfolio
+PRODUCT_BUNDLE_IDENTIFIER = com.atumra.portfolio
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2024 com.atumra.portfolio. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 com.atumra. All rights reserved.

@@ -1,4 +1,4 @@
-package com.atumra.portfolio.portfolio
+package com.atumra.portfolio
 
 import io.flutter.embedding.android.FlutterActivity
 

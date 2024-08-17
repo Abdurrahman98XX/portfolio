@@ -52,9 +52,9 @@ class Worker {
         mainSendPort.send(
           [
             request[0] as int, // id from request
-            handleRequest != null
-                ? await handleRequest(request[1]())
-                : await request[1](),
+            handleRequest == null || request[2]
+                ? await request[1]()
+                : await handleRequest(request[1]()),
           ],
         );
       },
@@ -73,7 +73,10 @@ class Worker {
 
   /// send a closure or global or static defind
   /// function to be computed in your worker
-  FutureOr<R> send<R>(Function() handler) async {
+  FutureOr<R> send<R>(
+    Function() handler, {
+    bool ignoreHandleRequest = true,
+  }) async {
     // waits for setup
     await _isolateReady.future;
     // time consumed calculator
@@ -83,7 +86,7 @@ class Worker {
     // assign this handler to a unique id (key)
     final id = _stack.length;
     // build the send message with an id and a handler
-    final message = List.unmodifiable([id, handler]);
+    final message = List.unmodifiable([id, handler, ignoreHandleRequest]);
     // let the store have your message
     _stack = List.unmodifiable([message]);
     // send your message to worker
@@ -104,7 +107,7 @@ class Worker {
   /// the predefined [Worker.handleRequest] prop
   FutureOr<R> sendData<R>(request) {
     if (handleRequest == null) throw 'you didn\'t set [handleRequest] prop';
-    return send(() => request);
+    return send(() => request, ignoreHandleRequest: false);
   }
 
 // our request stack
