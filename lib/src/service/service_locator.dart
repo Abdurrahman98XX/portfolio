@@ -19,6 +19,7 @@ abstract interface class ServiceLocator {
 
   static Future<void> setup() async {
     WidgetsFlutterBinding.ensureInitialized();
+
     // services initialization
     await SystemTheme.accentColor.load();
     if (KPlatform.isMacOS) await WindowManipulator.initialize();
@@ -27,9 +28,11 @@ abstract interface class ServiceLocator {
         options: DefaultFirebaseOptions.currentPlatform,
       );
     }
+
     // various packages configuration
     SystemTheme.fallbackColor = Colors.transparent;
     EquatableConfig.stringify = true;
+
     // TODO: always register services here
     getIt.registerLazySingleton(() => SharedPreferencesAsync());
     getIt.registerLazySingleton(
