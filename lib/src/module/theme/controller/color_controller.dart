@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/module/theme/model/user_color_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'user_color_controller.g.dart';
+part 'color_controller.g.dart';
 
-@Riverpod(keepAlive: true)
-class UserColorController extends _$UserColorController {
+@riverpod
+class ColorController extends _$ColorController {
   @override
   UserColorEntity build() {
     return UserColorEntity(
@@ -18,8 +18,11 @@ class UserColorController extends _$UserColorController {
     );
   }
 
-  void update(Color color) {
-    if (state.userColor == color) return;
+  /// returns old state when replaced by another
+  UserColorEntity? update(Color color) {
+    if (state.userColor == color) return null;
+    final prev = state;
     state = state.copyWith(userColor: color, modifiedAt: DateTime.now());
+    return prev;
   }
 }

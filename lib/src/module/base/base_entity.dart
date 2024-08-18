@@ -60,7 +60,7 @@ abstract class BaseEntity extends Equatable {
   final DateTime modifiedAt;
 
   @override
-  List get props => [...equality, name, id, vId, type, createdAt, modifiedAt];
+  List get props => [name, id, vId, type, createdAt, modifiedAt, ...equality];
 
   /// define every property that is not in the [props] list
   ///
@@ -70,3 +70,5 @@ abstract class BaseEntity extends Equatable {
   /// serializes object to a map (json like)
   Map<String, dynamic> toJson() => _$BaseEntityToJson(this);
 }
+
+enum Source { user, system }

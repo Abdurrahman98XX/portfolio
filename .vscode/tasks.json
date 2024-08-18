@@ -6,7 +6,7 @@
     {
       "label": "build",
       "type": "shell",
-      "command": "dart run build_runner watch"
+      "command": "dart run build_runner watch -d"
     }
   ]
 }

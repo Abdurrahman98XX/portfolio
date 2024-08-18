@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:isolate';
+import 'package:portfolio/src/service/service_locator.dart';
 
 typedef RequestHandler = Function(dynamic request);
 
 class Worker {
   Worker({this.handleRequest, this.useTimer = true}) {
-    // run Isolate.spawn
+    // run the [Isolate.spawn]
     (() => controller)();
     // listen to the first response in order to complete setup
     responseStream.firstWhere(_completeInterCommunicationSetup);
@@ -49,14 +50,10 @@ class Worker {
     // listen to main requests and handle it through worker requests handler
     workerReceivePort.listen(
       (request) async {
-        mainSendPort.send(
-          [
-            request[0] as int, // id from request
-            handleRequest == null || request[2]
-                ? await request[1]()
-                : await handleRequest(request[1]()),
-          ],
-        );
+        final id = request[0];
+        final req = await request[1]();
+        final noGlobal = handleRequest == null || request[2];
+        mainSendPort.send([id, noGlobal ? req : await handleRequest(req)]);
       },
     );
   }
@@ -73,10 +70,8 @@ class Worker {
 
   /// send a closure or global or static defind
   /// function to be computed in your worker
-  FutureOr<R> send<R>(
-    Function() handler, {
-    bool ignoreHandleRequest = true,
-  }) async {
+  // ignore: library_private_types_in_public_api
+  FutureOr<R> send<R>(R Function() handler, [_Who who = _Who.s]) async {
     // waits for setup
     await _isolateReady.future;
     // time consumed calculator
@@ -85,8 +80,12 @@ class Worker {
     if (useTimer) start = DateTime.now();
     // assign this handler to a unique id (key)
     final id = _stack.length;
-    // build the send message with an id and a handler
-    final message = List.unmodifiable([id, handler, ignoreHandleRequest]);
+    // build the request to be sent
+    final message = List.unmodifiable([
+      id,
+      handler,
+      who == _Who.s,
+    ]);
     // let the store have your message
     _stack = List.unmodifiable([message]);
     // send your message to worker
@@ -97,19 +96,26 @@ class Worker {
     _stack = List.unmodifiable(_stack.where((e) => id != e[id]));
     // simple time diffrence calculation of consumed time
     if (useTimer) duration = DateTime.now().difference(start!);
-    if (useTimer) print(duration!.inMilliseconds / 1000);
-    // dumpin result
+    if (useTimer) {
+      ServiceLocator.logger.info(
+        'request done in: ${duration!.inMilliseconds / 1000}S'
+        '\nresult is: $result',
+      );
+    }
+    // dumping result
     return result;
   }
 
   /// CAUTION: NEVER USE THIS METHOD WHILE NOT DEFINING [handleRequest] PROP
+  ///
   /// send a request/message to be computed using
   /// the predefined [Worker.handleRequest] prop
-  FutureOr<R> sendData<R>(request) {
-    if (handleRequest == null) throw 'you didn\'t set [handleRequest] prop';
-    return send(() => request, ignoreHandleRequest: false);
-  }
+  FutureOr<R> sendData<R>(message) => handleRequest == null
+      ? throw 'you didn\'t set [handleRequest] prop'
+      : send(() => message, _Who.sd);
 
-// our request stack
+  // our request stack
   List<List> _stack = List.unmodifiable([]);
 }
+
+enum _Who { sd, s }
