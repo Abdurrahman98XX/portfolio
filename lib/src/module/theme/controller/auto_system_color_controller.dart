@@ -18,7 +18,7 @@ Stream<Color> autoSystemColor(AutoSystemColorRef ref) async* {
     yield old;
     while (true) {
       await SystemTheme.accentColor.load();
-      await Future.delayed(const Duration(milliseconds: 250));
+      await Future.delayed(const Duration(seconds: 1));
       final color = SystemTheme.accentColor.accent;
       if (color.value != old.value) {
         old = color;

@@ -6,7 +6,7 @@ part of 'auto_system_color_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$autoSystemColorHash() => r'7b3b23c7bff7d76decf861f3a8bd34987a99e743';
+String _$autoSystemColorHash() => r'aa4d69b0a0881fc92e7e51b6709ba4c2ffd9e72d';
 
 /// See also [autoSystemColor].
 @ProviderFor(autoSystemColor)

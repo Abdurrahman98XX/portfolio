@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart';
 import 'package:equatable/equatable.dart';
 import 'package:go_router/go_router.dart';
+import 'package:portfolio/src/api/cache_api.dart';
+import 'package:portfolio/src/service/hash_message.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:portfolio/src/common/const.dart';
 import 'package:portfolio/src/service/worker.dart';
 import 'package:portfolio/src/service/router.dart';
 import 'package:talker_flutter/talker_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract interface class ServiceLocator {
   static final getIt = GetIt.instance;
@@ -32,7 +33,9 @@ abstract interface class ServiceLocator {
     EquatableConfig.stringify = true;
 
     // TODO: always register services here
-    getIt.registerSingleton(SharedPreferencesAsync());
+    getIt.registerSingleton(
+      CacheManager(),
+    );
     getIt.registerSingleton(
       globalRouter,
       dispose: (instance) => instance.dispose(),
@@ -46,11 +49,16 @@ abstract interface class ServiceLocator {
       instanceName: 'w1',
       dispose: (param) async => (await param.controller).kill(),
     );
+    getIt.registerSingleton(
+      const HashMessage(),
+      instanceName: 'w1',
+    );
   }
 
   static final client = getIt.get<Client>();
   static final logger = TalkerFlutter.init();
   static final router = getIt.get<GoRouter>();
-  static final storage = getIt.get<SharedPreferencesAsync>();
+  static final storage = getIt.get<CacheApi>();
+  static final hasher = getIt.get<HashMessage>();
   static final worker = getIt.get<Worker>(instanceName: 'w1');
 }
