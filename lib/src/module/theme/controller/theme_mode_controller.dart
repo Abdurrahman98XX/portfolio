@@ -4,7 +4,7 @@ import 'package:portfolio/src/module/theme/model/theme_mode_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'theme_mode_controller.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class ThemeModeController extends _$ThemeModeController {
   @override
   ThemeModeEntity build() {
