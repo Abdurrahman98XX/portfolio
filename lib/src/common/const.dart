@@ -2,10 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/localization/localization.dart';
 
-typedef JsonData<R> = Map<String, R>;
-
 abstract interface class Const {
-  static const id = 'com.atumra.portfolio';
+  static const appId = 'com.atumra.portfolio';
   static final navigatorKey = GlobalKey<NavigatorState>();
   static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   static const localizations = [

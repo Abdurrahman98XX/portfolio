@@ -1,6 +1,11 @@
 targets:
   $default:
     builders:
+      # freezed global configs
+      freezed:
+        options:
+          copy_with: true
+      # json  global configs
       json_serializable:
         options:
           any_map: false

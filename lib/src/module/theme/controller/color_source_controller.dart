@@ -9,12 +9,12 @@ class ColorSourceController extends _$ColorSourceController {
   ColorSourceEntity build() {
     return ColorSourceEntity(
       source: Source.system,
-      name: 'name',
-      id: 'id',
-      vId: 'vId',
-      type: 'type',
-      createdAt: DateTime.now(),
       modifiedAt: DateTime.now(),
+      createdAt: DateTime.now(),
+      id: 'color_source',
+      name: 'Color Source',
+      type: 'color',
+      vId: '1',
     );
   }
 

@@ -1,17 +1,11 @@
 {
-	// Place your portfolio workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
-	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
-	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
-	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
-	// Placeholders with the same ids are connected.
-	// Example:
 	"json": {
 		"scope": "dart",
 		"prefix": "entity",
 		"body": [
 			"import 'package:portfolio/src/module/base/base_entity.dart';",
 			"part '${TM_FILENAME_BASE}.g.dart';",
+			"",
 			"@jsonC",
 			"class ${1:Name}Entity extends BaseEntity {",
 			"  const ${1:Name}Entity({",
@@ -23,15 +17,18 @@
 			"    required super.createdAt,",
 			"    required super.modifiedAt,",
 			"  });",
-			"  final $0 ${2:Prop};",
+			"",
+			"  /// ${2:Prop} is $0",
+			"  final ${3:Type} ${2:Prop};",
+			"",
+			"  factory ${1:Name}Entity.fromJson(JsonData json) => _$${1:Name}EntityFromJson(json);",
+			"",
 			"  @override",
-			"  List get equality => [${2:Prop}];",
-			"  factory ${1:Name}Entity.fromJson(Map<String, dynamic> json) => _$${1:Name}EntityFromJson(json);",
-			"  @override",
-			"  Map<String, dynamic> toJson() => _$${1:Name}EntityToJson(this);",
+			"  JsonData toJson() => _$${1:Name}EntityToJson(this);",
+			"",
 			"  @override",
 			"  ${1:Name}Entity copyWith({",
-			"    $0? ${2:Prop},",
+			"    ${3:Type}? ${2:Prop},",
 			"    String? name,",
 			"    String? id,",
 			"    String? vId,",
@@ -39,16 +36,19 @@
 			"    DateTime? createdAt,",
 			"    DateTime? modifiedAt,",
 			"  }) {",
-			"  return ColorSourceEntity(",
-			"    source:  source?? this.source,",
-			"    name:name?? this.name,",
-			"    id:id?? this.id,",
-			"    vId:vId?? this.vId,",
-			"    type:type?? this.type,",
-			"    createdAt:createdAt?? this.createdAt,",
-			"    modifiedAt:modifiedAt?? this.modifiedAt,",
-			"  );",
+			"    return ${1:Name}Entity(",
+			"      ${2:Prop}: ${2:Prop} ?? this.${2:Prop},",
+			"      name: name ?? this.name,",
+			"      id: id ?? this.id,",
+			"      vId: vId ?? this.vId,",
+			"      type: type ?? this.type,",
+			"      createdAt: createdAt ?? this.createdAt,",
+			"      modifiedAt: modifiedAt ?? this.modifiedAt,",
+			"    );",
 			"  }",
+			"",
+			"  @override",
+			"  List get equality => [${2:Prop}];",
 			"}",
 		],
 		"description": "json data class"

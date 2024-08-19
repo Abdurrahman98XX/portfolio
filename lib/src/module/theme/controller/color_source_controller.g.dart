@@ -7,7 +7,7 @@ part of 'color_source_controller.dart';
 // **************************************************************************
 
 String _$colorSourceControllerHash() =>
-    r'7cb4b1c871d510c43619e2ca1903b39c3e67bbc5';
+    r'7b028663cb73073e93cce1b257208a41a34f9b8a';
 
 /// See also [ColorSourceController].
 @ProviderFor(ColorSourceController)

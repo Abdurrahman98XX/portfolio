@@ -12,13 +12,14 @@ class ColorSourceEntity extends BaseEntity {
     required super.createdAt,
     required super.modifiedAt,
   });
+
   final Source source;
+
+  factory ColorSourceEntity.fromJson(JsonData json) => _$ColorSourceEntityFromJson(json);
+
   @override
-  List get equality => [source];
-  factory ColorSourceEntity.fromJson(Map<String, dynamic> json) =>
-      _$ColorSourceEntityFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$ColorSourceEntityToJson(this);
+  JsonData toJson() => _$ColorSourceEntityToJson(this);
+
   @override
   ColorSourceEntity copyWith({
     Source? source,
@@ -39,4 +40,7 @@ class ColorSourceEntity extends BaseEntity {
       modifiedAt: modifiedAt ?? this.modifiedAt,
     );
   }
+
+  @override
+  List get equality => [source];
 }

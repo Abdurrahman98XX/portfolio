@@ -25,9 +25,11 @@ class Worker {
   final RequestHandler? handleRequest;
 
   /// the data main reciever gets (you may use with [StreamBuilder] widget)
-  late final responseStream = _mainReceivePort.asBroadcastStream().where(
-        (r) => _isolateReady.isCompleted ? r != null && r is! SendPort : true,
-      );
+  late final responseStream = _mainReceivePort
+      // if isolate is ready then filter out nulls and [SendPort]s
+      // otherwise let it be as it is
+      .where((r) => _isolateReady.isCompleted ? r != null && r is! SendPort : true)
+      .asBroadcastStream();
 
   /// worker spawner and life-cycle controller
   late final controller = Isolate.spawn(
@@ -36,6 +38,8 @@ class Worker {
     // channel and a function to handle main requests
     [_mainReceivePort.sendPort, handleRequest],
   );
+
+  Future<void> kill() => controller.then((i) => i.kill());
 
   /// worker requests handler
   static void _handleMainRequests(injection) {
@@ -52,6 +56,9 @@ class Worker {
       (request) async {
         final id = request[0];
         final req = await request[1]();
+        // if true then req is a function with logic to handle
+        // either if a global handler is set or not
+        // if false then req is a value to be computed using the global handler
         final noGlobal = handleRequest == null || request[2];
         mainSendPort.send([id, noGlobal ? req : await handleRequest(req)]);
       },
@@ -70,8 +77,14 @@ class Worker {
 
   /// send a closure or global or static defind
   /// function to be computed in your worker
+  ///
+  /// ```
+  /// final worker = Worker();
+  /// final result = await worker.send(() => 1 + 1);
+  /// print(result);
+  /// ```
   // ignore: library_private_types_in_public_api
-  FutureOr<R> send<R>(R Function() handler, [_Who who = _Who.s]) async {
+  FutureOr<R> send<R>(R Function() handler, [_Who who = _Who.function]) async {
     // waits for setup
     await _isolateReady.future;
     // time consumed calculator
@@ -81,11 +94,7 @@ class Worker {
     // assign this handler to a unique id (key)
     final id = _stack.length;
     // build the request to be sent
-    final message = List.unmodifiable([
-      id,
-      handler,
-      who == _Who.s,
-    ]);
+    final message = List.unmodifiable([id, handler, who == _Who.function]);
     // let the store have your message
     _stack = List.unmodifiable([message]);
     // send your message to worker
@@ -110,12 +119,21 @@ class Worker {
   ///
   /// send a request/message to be computed using
   /// the predefined [Worker.handleRequest] prop
-  FutureOr<R> sendData<R>(message) => handleRequest == null
+  ///
+  /// ```
+  /// final worker = Worker( handleRequest: (request) async {
+  ///   if (request is String) return json.decode(request);
+  ///   });
+  ///
+  /// final result = await worker.sendData('{name: "boody, age: 25}');
+  /// print(result);
+  /// ```
+  FutureOr<R> sendData<R>(R message) => handleRequest == null
       ? throw 'you didn\'t set [handleRequest] prop'
-      : send(() => message, _Who.sd);
+      : send(() => message, _Who.value);
 
   // our request stack
-  List<List> _stack = List.unmodifiable([]);
+  List<List<dynamic>> _stack = List.unmodifiable([]);
 }
 
-enum _Who { sd, s }
+enum _Who { value, function }

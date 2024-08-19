@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
+
 part 'base_entity.g.dart';
 
 // TODO UNDONE HACK FIXME
@@ -72,3 +74,5 @@ abstract class BaseEntity extends Equatable {
 }
 
 enum Source { user, system }
+
+typedef JsonData = Map<String, dynamic>;

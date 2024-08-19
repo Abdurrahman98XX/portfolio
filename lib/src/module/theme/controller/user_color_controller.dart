@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/module/theme/model/user_color_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'color_controller.g.dart';
+part 'user_color_controller.g.dart';
 
 @riverpod
-class ColorController extends _$ColorController {
+class UserColorController extends _$UserColorController {
   @override
   UserColorEntity build() {
     return UserColorEntity(
-      userColor: Colors.brown,
-      name: 'name',
-      id: 'id',
-      vId: 'vId',
-      type: 'type',
-      createdAt: DateTime.now(),
+      userColor: Colors.blue,
       modifiedAt: DateTime.now(),
+      createdAt: DateTime.now(),
+      id: 'user_color',
+      name: 'User Color',
+      type: 'color',
+      vId: '1',
     );
   }
 

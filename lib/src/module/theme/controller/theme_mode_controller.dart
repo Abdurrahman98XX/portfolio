@@ -10,12 +10,12 @@ class ThemeModeController extends _$ThemeModeController {
   ThemeModeEntity build() {
     return ThemeModeEntity(
       themeMode: ThemeMode.system,
-      name: 'name',
-      id: 'id',
-      vId: 'vId',
-      type: 'type',
-      createdAt: DateTime.now(),
       modifiedAt: DateTime.now(),
+      createdAt: DateTime.now(),
+      id: 'theme_mode',
+      name: 'Theme Mode',
+      type: 'theme',
+      vId: '1',
     );
   }
 
@@ -33,5 +33,4 @@ class ThemeModeController extends _$ThemeModeController {
   void toggle() => _light ? darkMode() : lightMode();
 }
 
-bool get _light =>
-    PlatformDispatcher.instance.platformBrightness == Brightness.light;
+bool get _light => PlatformDispatcher.instance.platformBrightness == Brightness.light;

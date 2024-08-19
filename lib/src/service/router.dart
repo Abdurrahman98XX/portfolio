@@ -7,7 +7,7 @@ import 'package:talker_flutter/talker_flutter.dart';
 final globalRouter = GoRouter(
   redirectLimit: 0,
   // debugLogDiagnostics: true,
-  restorationScopeId: Const.id,
+  restorationScopeId: Const.appId,
   navigatorKey: Const.navigatorKey,
   observers: [TalkerRouteObserver(ServiceLocator.logger)],
   routes: androidRoutes,

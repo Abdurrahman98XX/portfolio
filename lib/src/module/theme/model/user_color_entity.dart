@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:portfolio/src/common/json_conversion.dart';
 import 'package:portfolio/src/module/base/base_entity.dart';
 part 'user_color_entity.g.dart';
 
@@ -15,13 +13,14 @@ class UserColorEntity extends BaseEntity {
     required super.createdAt,
     required super.modifiedAt,
   });
+
+  /// color is
   final Color userColor;
+
+  factory UserColorEntity.fromJson(JsonData json) => _$UserColorEntityFromJson(json);
+
   @override
-  List get equality => [userColor];
-  factory UserColorEntity.fromJson(Map<String, dynamic> json) =>
-      _$UserColorEntityFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$UserColorEntityToJson(this);
+  JsonData toJson() => _$UserColorEntityToJson(this);
 
   @override
   UserColorEntity copyWith({
@@ -32,14 +31,18 @@ class UserColorEntity extends BaseEntity {
     String? type,
     DateTime? createdAt,
     DateTime? modifiedAt,
-  }) =>
-      UserColorEntity(
-        userColor: userColor ?? this.userColor,
-        name: name ?? this.name,
-        id: id ?? this.id,
-        vId: vId ?? this.vId,
-        type: type ?? this.type,
-        createdAt: createdAt ?? this.createdAt,
-        modifiedAt: modifiedAt ?? this.modifiedAt,
-      );
+  }) {
+    return UserColorEntity(
+      userColor: userColor ?? this.userColor,
+      name: name ?? this.name,
+      id: id ?? this.id,
+      vId: vId ?? this.vId,
+      type: type ?? this.type,
+      createdAt: createdAt ?? this.createdAt,
+      modifiedAt: modifiedAt ?? this.modifiedAt,
+    );
+  }
+
+  @override
+  List get equality => [userColor];
 }

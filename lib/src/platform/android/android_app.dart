@@ -16,7 +16,7 @@ class AndroidApp extends StatelessWidget {
         final color = ref.watch(autoSystemColorProvider).value;
         return MaterialApp.router(
           themeMode: themeMode,
-          restorationScopeId: Const.id,
+          restorationScopeId: Const.appId,
           localizationsDelegates: Const.localizations,
           scaffoldMessengerKey: Const.scaffoldMessengerKey,
           supportedLocales: AppLocalizations.supportedLocales,
