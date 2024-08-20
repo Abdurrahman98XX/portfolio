@@ -18,7 +18,7 @@ class UserColorController extends _$UserColorController {
     );
   }
 
-  /// returns old state when replaced by another
+  /// returns old state when updating completes
   UserColorEntity? update(Color color) {
     if (state.userColor == color) return null;
     final prev = state;

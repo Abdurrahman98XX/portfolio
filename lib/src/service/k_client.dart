@@ -3,20 +3,15 @@ import 'package:cronet_http/cronet_http.dart';
 import 'package:fetch_client/fetch_client.dart';
 import 'package:portfolio/src/common/global.dart';
 import 'package:cupertino_http/cupertino_http.dart';
-import 'package:portfolio/src/service/service_locator.dart';
 
 abstract class KClient with BaseClient {
   const KClient(this.provider);
   final Client provider;
   static const _maxCache = 1024 * 1024 * 3;
   static Client Function() service() {
-    try {
-      if (KPlatform.isBrowser) return _BrowserHttpClient.new;
-      if (KPlatform.isAndroid) return _AndroidHttpClient.new;
-      if (KPlatform.isIOS || KPlatform.isMacOS) return _CupertinoHttpClient.new;
-    } catch (e, st) {
-      ServiceLocator.logger.error('msg', e, st);
-    }
+    if (KPlatform.isBrowser) return _BrowserHttpClient.new;
+    if (KPlatform.isAndroid) return _AndroidHttpClient.new;
+    if (KPlatform.isIOS || KPlatform.isMacOS) return _CupertinoHttpClient.new;
     return Client.new;
   }
 

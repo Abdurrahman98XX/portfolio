@@ -41,4 +41,6 @@ class KPlatform {
   static final isLinux = !isBrowser && target == TargetPlatform.linux;
   static final isWindows = !isBrowser && target == TargetPlatform.windows;
   static final target = defaultTargetPlatform;
+  static final targetName = isBrowser ? 'browser' : target.name;
+  static final isCanvasKitEnabled = isCanvasKit;
 }

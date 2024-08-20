@@ -19,9 +19,12 @@ class ThemeModeController extends _$ThemeModeController {
     );
   }
 
-  void update(ThemeMode themeMode) {
-    if (state.themeMode == themeMode) return;
-    state = state.copyWith(themeMode: themeMode, modifiedAt: DateTime.now());
+  ThemeModeEntity? update(ThemeMode themeMode) {
+    if (state.themeMode == themeMode) return null;
+    return old(state, state.copyWith(themeMode: themeMode, modifiedAt: DateTime.now()));
+    // final prev = state;
+    // state = state.copyWith(themeMode: themeMode, modifiedAt: DateTime.now());
+    // return prev;
   }
 
   void darkMode() => update(ThemeMode.dark);
@@ -30,7 +33,13 @@ class ThemeModeController extends _$ThemeModeController {
 
   void systemMode() => update(ThemeMode.system);
 
-  void toggle() => _light ? darkMode() : lightMode();
+  void toggle() => isLight ? darkMode() : lightMode();
 }
 
-bool get _light => PlatformDispatcher.instance.platformBrightness == Brightness.light;
+bool get isLight => PlatformDispatcher.instance.platformBrightness == Brightness.light;
+
+R old<R>(R state, R newVal) {
+  final pre = state;
+  state = newVal;
+  return pre;
+}

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:isolate';
+
 import 'package:portfolio/src/service/service_locator.dart';
 
 typedef RequestHandler = Function(dynamic request);
@@ -106,7 +107,7 @@ class Worker {
     // simple time diffrence calculation of consumed time
     if (useTimer) duration = DateTime.now().difference(start!);
     if (useTimer) {
-      ServiceLocator.logger.info(
+      ServiceLocator.logger.i(
         'request done in: ${duration!.inMilliseconds / 1000}S'
         '\nresult is: $result',
       );

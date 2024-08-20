@@ -41,14 +41,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
-  ansicolor:
-    dependency: transitive
-    description:
-      name: ansicolor
-      sha256: "50e982d500bc863e1d703448afdbf9e5a72eb48840a4f766fa361ffd6877055f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.3"
   appkit_ui_element_colors:
     dependency: transitive
     description:
@@ -461,14 +453,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
-  group_button:
-    dependency: transitive
-    description:
-      name: group_button
-      sha256: "0610fcf28ed122bfb4b410fce161a390f7f2531d55d1d65c5375982001415940"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.4"
   gtk:
     dependency: transitive
     description:
@@ -629,6 +613,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      sha256: "697d067c60c20999686a0add96cf6aba723b3aa1f83ecf806a8097231529ec32"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
   logging:
     dependency: transitive
     description:
@@ -1010,38 +1002,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.2"
-  talker:
-    dependency: transitive
-    description:
-      name: talker
-      sha256: "30bbc526bb2e7d465c630f087479616b6b84570728539fde536a3b652acad2f6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.4.1"
-  talker_flutter:
-    dependency: "direct main"
-    description:
-      name: talker_flutter
-      sha256: "51e1f26a726dced6952c2070ae2bc7e23393c319e2f98def2009fdbcdfbda7aa"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.4.1"
-  talker_logger:
-    dependency: transitive
-    description:
-      name: talker_logger
-      sha256: "515d2e5803928b2bab42108f710c814743965f939be2b4261f9c3045ef8a3fba"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.4.1"
-  talker_riverpod_logger:
-    dependency: "direct main"
-    description:
-      name: talker_riverpod_logger
-      sha256: "6b8efe833b851f68353d5d32ae2dbf265a617e89e53b2b4f2fcd6548a259bf20"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.4.1"
   term_glyph:
     dependency: transitive
     description:

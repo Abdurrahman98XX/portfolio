@@ -1,12 +1,12 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/global.dart';
 import 'package:portfolio/src/localization/localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/src/service/k_device_info.dart';
 import 'package:portfolio/src/service/service_locator.dart';
 import 'package:portfolio/src/module/theme/controller/auto_system_color_controller.dart';
 import 'package:portfolio/src/module/theme/controller/theme_mode_controller.dart';
-
-late final bool? isPredective;
 
 class AndroidApp extends StatelessWidget {
   const AndroidApp({super.key});
@@ -16,6 +16,8 @@ class AndroidApp extends StatelessWidget {
       builder: (context, ref, child) {
         final themeMode = ref.watch(themeModeControllerProvider).themeMode;
         final color = ref.watch(autoSystemColorProvider()).value;
+        final preBack =
+            (ref.read(deviceInfoProvider) as AndroidDeviceInfo).version.sdkInt > 33;
         return MaterialApp.router(
           themeMode: themeMode,
           restorationScopeId: Global.appId,
@@ -28,9 +30,10 @@ class AndroidApp extends StatelessWidget {
           routeInformationParser: ServiceLocator.router.routeInformationParser,
           routeInformationProvider: ServiceLocator.router.routeInformationProvider,
           theme: ThemeData(
-            pageTransitionsTheme: const PageTransitionsTheme(
+            pageTransitionsTheme: PageTransitionsTheme(
               builders: <TargetPlatform, PageTransitionsBuilder>{
-                TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+                if (preBack)
+                  TargetPlatform.android: const PredictiveBackPageTransitionsBuilder(),
               },
             ),
             brightness: Brightness.light,
@@ -40,9 +43,10 @@ class AndroidApp extends StatelessWidget {
             ),
           ),
           darkTheme: ThemeData(
-            pageTransitionsTheme: const PageTransitionsTheme(
+            pageTransitionsTheme: PageTransitionsTheme(
               builders: <TargetPlatform, PageTransitionsBuilder>{
-                TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+                if (preBack)
+                  TargetPlatform.android: const PredictiveBackPageTransitionsBuilder(),
               },
             ),
             brightness: Brightness.dark,
