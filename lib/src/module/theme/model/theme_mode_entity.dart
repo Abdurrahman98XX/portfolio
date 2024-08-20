@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/module/base/base_entity.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:portfolio/src/common/json_conversion.dart';
+import 'package:portfolio/src/base/base_entity.dart';
 part 'theme_mode_entity.g.dart';
 
-@jsonC
+@JsonSerializable(converters: converters)
 class ThemeModeEntity extends BaseEntity {
   const ThemeModeEntity({
     required this.themeMode,

@@ -1,4 +1,4 @@
-import 'package:portfolio/src/module/base/base_entity.dart';
+import 'package:portfolio/src/base/base_entity.dart';
 import 'package:portfolio/src/module/theme/model/color_source_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'color_source_controller.g.dart';

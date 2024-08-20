@@ -8,7 +8,6 @@ analyzer:
   #   invalid_annotation_target: ignore
   exclude:
     - "**/*.g.dart"
-    - build/**
   plugins:
     - custom_lint
 

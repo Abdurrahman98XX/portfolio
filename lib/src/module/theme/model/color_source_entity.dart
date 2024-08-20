@@ -1,7 +1,9 @@
-import 'package:portfolio/src/module/base/base_entity.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:portfolio/src/common/json_conversion.dart';
+import 'package:portfolio/src/base/base_entity.dart';
 part 'color_source_entity.g.dart';
 
-@jsonC
+@JsonSerializable(converters: converters)
 class ColorSourceEntity extends BaseEntity {
   const ColorSourceEntity({
     required this.source,

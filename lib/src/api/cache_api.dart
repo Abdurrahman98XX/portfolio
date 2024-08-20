@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:portfolio/src/module/base/base_entity.dart';
+import 'package:portfolio/src/base/base_entity.dart';
 import 'package:portfolio/src/service/service_locator.dart';
 
 class CacheManager {

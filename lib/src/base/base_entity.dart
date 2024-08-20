@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
@@ -9,7 +8,7 @@ part 'base_entity.g.dart';
 // CheckedFromJsonException is thrown when the JSON is not valid
 // UnrecognizedKeysException is thrown when the JSON has unrecognized keys
 /// always use this annotation with [BaseEntity]
-const jsonC = JsonSerializable(converters: converters);
+const jsonsC = JsonSerializable(converters: converters);
 
 /// This class provides common properties and methods that are shared by all entities.
 ///

@@ -49,6 +49,7 @@ dependencies:
   url_launcher: ^6.3.0
   path_provider: ^2.1.4
   isar_flutter_libs: ^4.0.0-dev.13
+  device_info_plus: ^10.1.2
 
 dev_dependencies:
   flutter_test:

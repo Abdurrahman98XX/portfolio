@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:json_annotation/json_annotation.dart';
 
 class EpochDateTimeConverter implements JsonConverter<DateTime, int> {
@@ -17,7 +17,7 @@ class ColorConverter implements JsonConverter<Color, int> {
   int toJson(Color object) => object.value;
 }
 
-// add every converter here
+// TODO: Always use these converters inside of [@JsonSerializable]
 const List<JsonConverter> converters = [
   EpochDateTimeConverter(),
   ColorConverter(),

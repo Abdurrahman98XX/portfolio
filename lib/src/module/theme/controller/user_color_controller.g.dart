@@ -7,7 +7,7 @@ part of 'user_color_controller.dart';
 // **************************************************************************
 
 String _$userColorControllerHash() =>
-    r'1d34bb04e8fec1ecad407d4e9e44d35f7aed8f93';
+    r'a73169076c75f8b38fe21c7632b4466443cb4c40';
 
 /// See also [UserColorController].
 @ProviderFor(UserColorController)

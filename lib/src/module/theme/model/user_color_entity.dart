@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/module/base/base_entity.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:portfolio/src/common/json_conversion.dart';
+import 'package:portfolio/src/base/base_entity.dart';
 part 'user_color_entity.g.dart';
 
-@jsonC
+@JsonSerializable(converters: converters)
 class UserColorEntity extends BaseEntity {
   const UserColorEntity({
     required this.userColor,
@@ -14,7 +16,6 @@ class UserColorEntity extends BaseEntity {
     required super.modifiedAt,
   });
 
-  /// color is
   final Color userColor;
 
   factory UserColorEntity.fromJson(JsonData json) => _$UserColorEntityFromJson(json);
