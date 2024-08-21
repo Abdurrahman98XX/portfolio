@@ -48,6 +48,7 @@ dependencies:
   isar_flutter_libs: ^4.0.0-dev.13
   device_info_plus: ^10.1.2
   logger: ^2.4.0
+  yaru: ^4.1.0
 
 dev_dependencies:
   flutter_test:

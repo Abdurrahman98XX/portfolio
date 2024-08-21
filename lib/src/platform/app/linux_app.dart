@@ -1,6 +1,11 @@
-import 'package:yaru/yaru.dart';
+import 'package:flutter/widgets.dart';
+import 'yaru';
 
-class LinuxApp {
-const LinuxApp();
-  
+class LinuxApp extends StatelessWidget {
+  const LinuxApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    throw UnimplementedError();
+  }
 }
