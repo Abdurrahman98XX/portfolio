@@ -5,7 +5,7 @@ import 'package:portfolio/src/service/k_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/src/service/k_device_info.dart';
 import 'package:portfolio/src/service/service_locator.dart';
-import 'package:portfolio/src/platform/android/android_app.dart';
+import 'package:portfolio/src/platform/android_app.dart';
 
 void main(List<String> args) async {
   return await runWithClient(

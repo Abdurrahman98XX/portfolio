@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:portfolio/src/common/global.dart';
-import 'package:portfolio/src/platform/android/android_routes.dart';
+import 'package:portfolio/src/platform/android_routes.dart';
 
 final globalRouter = GoRouter(
   redirectLimit: 0,

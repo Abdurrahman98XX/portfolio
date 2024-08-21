@@ -29,7 +29,6 @@ dependencies:
   json_annotation: ^4.9.0
 
   # platform UI
-  yaru: ^4.0.0
   macos_ui: ^2.0.7
   fluent_ui: ^4.9.1
   system_theme: ^3.0.0

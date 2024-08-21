@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart' show GoRoute, GoRouter;
-import 'package:portfolio/src/platform/android/page/home_page.dart';
+import 'package:go_router/go_router.dart';
 
 final List<GoRoute> androidRoutes = [
   GoRoute(
     path: '/',
-    builder: (context, state) => const HomePage(),
+    // builder: (context, state) => const HomePage(),
     routes: [
       GoRoute(
         path: 'settings',
