@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
-class WindowsApp extends StatelessWidget {
-  const WindowsApp({super.key});
+class Windows{{{name.pascalCase()}}} extends StatelessWidget {
+  const Windows{{{name.pascalCase()}}}({super.key});
 
   @override
   Widget build(BuildContext context) {

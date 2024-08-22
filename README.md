@@ -1,16 +1,20 @@
-# portfolio
+# requirments when developing this app
 
-A new Flutter project.
+## creating entities
 
-## Getting Started
+### the easy way
 
-This project is a starting point for a Flutter application.
+- (vscode snippets) type entity and it'll create it for ya, type the `Name` for class then the new `prop` name and then the `prop`'s `Type`
 
-A few resources to get you started if this is your first Flutter project:
+### manual way
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- extend `BaseEntity` class when creating a new entity class
+- annotate with `@JsonSerializable(converters: converters)`
+- define the new `prop`
+- add it to `copyWith` parameter (make it nullable)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+- **VERY IMPORTANT !!!** : you must add every new `property` you declare to the `equality` list, in order to make the entity functional (used for hasing and equality assertion)
+
+- never use string literals for UI, use localization

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class IosApp extends StatelessWidget {
-  const IosApp({super.key});
+class Ios{{{name.pascalCase()}}} extends StatelessWidget {
+  const Ios{{{name.pascalCase()}}}({super.key});
   
   @override
   Widget build(BuildContext context) {

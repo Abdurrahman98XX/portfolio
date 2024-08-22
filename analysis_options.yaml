@@ -1,17 +1,10 @@
 include: package:flutter_lints/flutter.yaml
 
-analyzer:
-  language:
-    strict-casts: false
-    # strict-raw-types: true
-  # errors:
-  #   invalid_annotation_target: ignore
-  exclude:
-    - "**/*.g.dart"
-  plugins:
-    - custom_lint
-
 linter:
   rules:
-    prefer_single_quotes: true
-    cancel_subscriptions: true
+
+analyzer:
+  exclude:
+    - "mason/"
+  plugins:
+    - custom_lint
