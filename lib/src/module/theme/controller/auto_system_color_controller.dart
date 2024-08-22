@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:system_theme/system_theme.dart';
@@ -24,8 +23,8 @@ Stream<Color> autoSystemColor(
       var old = SystemTheme.accentColor.accent;
       yield old;
       while (listenSystemColorChange || kDebugMode) {
-        await SystemTheme.accentColor.load();
         await Future.delayed(const Duration(seconds: 1));
+        await SystemTheme.accentColor.load();
         final color = SystemTheme.accentColor.accent;
         if (color.value != old.value) {
           old = color;

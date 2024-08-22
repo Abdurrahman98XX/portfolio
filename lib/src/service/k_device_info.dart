@@ -13,7 +13,7 @@ abstract class KDeviceInfo {
     if (KPlatform.isMacOS) return _i.macOsInfo;
     if (KPlatform.isWindows) return _i.windowsInfo;
     if (KPlatform.isLinux) return _i.linuxInfo;
-    throw 'do you really using fucking fuchsia???';
+    throw 'do you really fucking using fuchsia???';
   }
 }
 

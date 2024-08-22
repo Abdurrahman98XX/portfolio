@@ -1,5 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/src/module/theme/controller/auto_system_color_controller.dart';
+import 'package:portfolio/src/module/theme/controller/color_source_controller.dart';
+import 'package:portfolio/src/module/theme/controller/theme_mode_controller.dart';
+import 'package:portfolio/src/module/theme/controller/user_color_controller.dart';
 import 'package:portfolio/src/platform/app/android_app.dart';
 import 'package:portfolio/src/platform/app/ios_app.dart';
 import 'package:portfolio/src/platform/app/linux_app.dart';
@@ -11,13 +16,21 @@ class AdaptiveApp extends StatelessWidget {
   final TargetPlatform? testPlatform;
   @override
   Widget build(BuildContext context) {
-    return switch (testPlatform ?? defaultTargetPlatform) {
-      TargetPlatform.android => const AndroidApp(),
-      TargetPlatform.iOS => const IosApp(),
-      TargetPlatform.linux => const LinuxApp(),
-      TargetPlatform.macOS => const MacosApp(),
-      TargetPlatform.windows => const WindowsApp(),
-      _ => throw 'who the fuck uses fuchsia',
-    };
+    return Consumer(
+      builder: (context, ref, child) {
+        final watchThemeMode = ref.watch(themeModeControllerProvider);
+        final watchColorSource = ref.watch(colorSourceControllerProvider);
+        final watchAutoColor = ref.watch(autoSystemColorProvider());
+        final watchUserColor = ref.watch(userColorControllerProvider);
+        return switch (testPlatform ?? defaultTargetPlatform) {
+          TargetPlatform.android => AndroidApp(themeMode: watchThemeMode.themeMode),
+          TargetPlatform.iOS => IosApp(),
+          TargetPlatform.linux => LinuxApp(),
+          TargetPlatform.macOS => MacosApp(),
+          TargetPlatform.windows => WindowsApp(),
+          _ => throw 'who the fuck uses fuchsia',
+        };
+      },
+    );
   }
 }

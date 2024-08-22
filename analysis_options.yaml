@@ -5,6 +5,6 @@ linter:
 
 analyzer:
   exclude:
-    - "mason/"
+    - "mason/**"
   plugins:
     - custom_lint
