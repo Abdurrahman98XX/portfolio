@@ -1,7 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:portfolio/src/common/global.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'k_device_info.g.dart';
 
 abstract class KDeviceInfo {
   static final _i = DeviceInfoPlugin();
@@ -17,5 +16,7 @@ abstract class KDeviceInfo {
   }
 }
 
-@riverpod
-BaseDeviceInfo deviceInfo(DeviceInfoRef ref) => throw UnimplementedError('deviceInfo');
+final deviceInfoProvider = Provider<BaseDeviceInfo>(
+  (_) => throw '',
+  name: 'deviceInfoProvider',
+);

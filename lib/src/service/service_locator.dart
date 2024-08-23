@@ -6,7 +6,8 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart';
-import 'package:logger/logger.dart' if (dart.library.js) 'package:logger/web.dart';
+import 'package:logger/logger.dart'
+    if (dart.library.js) 'package:logger/web.dart';
 import 'package:macos_ui/macos_ui.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:system_theme/system_theme.dart';
@@ -18,6 +19,7 @@ import 'package:portfolio/src/module/theme/model/theme_mode_entity.dart';
 import 'package:portfolio/src/module/theme/model/user_color_entity.dart';
 import 'package:portfolio/src/service/router.dart';
 import 'package:portfolio/src/service/worker.dart';
+import 'package:yaru/yaru.dart';
 
 abstract interface class ServiceLocator {
   static Future<void> setup() async {
@@ -25,8 +27,8 @@ abstract interface class ServiceLocator {
 
     // services initialization
     Hive.defaultDirectory = (await getApplicationDocumentsDirectory()).path;
-    if (KPlatform.isMacOS) await WindowManipulator.initialize();
-    await SystemTheme.accentColor.load();
+    if (KPlatform.isMacOS) await const MacosWindowUtilsConfig().apply();
+    if (KPlatform.isLinux) await YaruWindowTitleBar.ensureInitialized();
     // if (!KPlatform.isLinux) {
     //   await Firebase.initializeApp(
     //     options: DefaultFirebaseOptions.currentPlatform,
@@ -53,8 +55,10 @@ abstract interface class ServiceLocator {
     getIt.registerSingleton(Client(), dispose: (i) => i.close());
     getIt.registerSingleton(Logger(), dispose: (i) => i.close());
     getIt.registerSingleton(globalRouter, dispose: (i) => i.dispose());
-    getIt.registerFactoryParam((name, _) => CacheManager(group: name as String));
-    getIt.registerSingleton(Worker(), instanceName: '1', dispose: (i) => i.kill());
+    getIt
+        .registerFactoryParam((name, _) => CacheManager(group: name as String));
+    getIt.registerSingleton(Worker(),
+        instanceName: '1', dispose: (i) => i.kill());
   }
 
   static final client = getIt.get<Client>();

@@ -13,7 +13,9 @@ void main(List<String> args) async {
       await ServiceLocator.setup();
       return runApp(
         ProviderScope(
-          overrides: [deviceInfoProvider.overrideWithValue(await KDeviceInfo.instance)],
+          overrides: [
+            deviceInfoProvider.overrideWithValue(await KDeviceInfo.instance),
+          ],
           observers: [StateObserver()],
           child: const AdaptiveApp(),
         ),

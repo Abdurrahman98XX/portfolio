@@ -1,5 +1,6 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:portfolio/src/common/global.dart';
 import 'package:portfolio/src/module/theme/model/theme_mode_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'theme_mode_controller.g.dart';
@@ -32,7 +33,5 @@ class ThemeModeController extends _$ThemeModeController {
 
   void systemMode() => update(ThemeMode.system);
 
-  void toggle() => isLight ? darkMode() : lightMode();
+  void toggle() => KPlatform.isLight ? darkMode() : lightMode();
 }
-
-bool get isLight => PlatformDispatcher.instance.platformBrightness == Brightness.light;

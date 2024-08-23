@@ -18,3 +18,5 @@
 - **VERY IMPORTANT !!!** : you must add every new `property` you declare to the `equality` list, in order to make the entity functional (used for hasing and equality assertion)
 
 - never use string literals for UI, use localization
+
+a pub to be add {connectivity_plus}

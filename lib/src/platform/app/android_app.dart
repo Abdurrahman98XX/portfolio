@@ -17,6 +17,7 @@ class AndroidApp extends StatelessWidget {
     this.supportedLocales = const <Locale>[Locale('en', 'US')],
     this.themeMode,
     this.shortcuts,
+    this.actions,
   });
   final BackButtonDispatcher? backButtonDispatcher;
   final ThemeData? darkTheme;
@@ -32,10 +33,12 @@ class AndroidApp extends StatelessWidget {
   final RouterDelegate<Object>? routerDelegate;
   final Iterable<Locale> supportedLocales;
   final ThemeMode? themeMode;
+  final Map<Type, Action<Intent>>? actions;
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       backButtonDispatcher: backButtonDispatcher,
+      actions: {...WidgetsApp.defaultActions, ...?actions},
       darkTheme: darkTheme,
       theme: theme,
       key: key,
@@ -49,7 +52,7 @@ class AndroidApp extends StatelessWidget {
       routerDelegate: routerDelegate,
       supportedLocales: supportedLocales,
       themeMode: themeMode,
-      shortcuts: shortcuts,
+      shortcuts: {...WidgetsApp.defaultShortcuts, ...?shortcuts},
     );
   }
 }

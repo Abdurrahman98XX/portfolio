@@ -43,4 +43,6 @@ class KPlatform {
   static final target = defaultTargetPlatform;
   static final targetName = isBrowser ? 'browser' : target.name;
   static final isCanvasKitEnabled = isCanvasKit;
+  static bool get isLight =>
+      PlatformDispatcher.instance.platformBrightness == Brightness.light;
 }
