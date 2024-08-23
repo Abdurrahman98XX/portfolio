@@ -4,11 +4,8 @@ import 'package:portfolio/src/common/json_conversion.dart';
 
 part 'base_entity.g.dart';
 
-// TODO UNDONE HACK FIXME
 // CheckedFromJsonException is thrown when the JSON is not valid
 // UnrecognizedKeysException is thrown when the JSON has unrecognized keys
-/// always use this annotation with [BaseEntity]
-const jsonsC = JsonSerializable(converters: converters);
 
 /// This class provides common properties and methods that are shared by all entities.
 ///
@@ -18,6 +15,9 @@ const jsonsC = JsonSerializable(converters: converters);
   ignoreUnannotated: true,
   converters: converters,
 )
+// TODO: whenever Making an entity use `BaseEntity`
+// HACK: add every new `property` you declare to the `equality` list
+// TODO: update `copyWith()` to match with the constuctor
 abstract class BaseEntity extends Equatable {
   const BaseEntity({
     required this.name,

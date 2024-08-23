@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/foundation.dart';
 import 'package:portfolio/src/common/global.dart';
 import 'package:portfolio/src/module/theme/model/theme_mode_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

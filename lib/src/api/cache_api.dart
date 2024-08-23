@@ -1,24 +1,33 @@
-import 'package:hive/hive.dart';
+import 'dart:async';
 import 'package:portfolio/src/base/base_entity.dart';
-import 'package:portfolio/src/service/service_locator.dart';
 
-class CacheManager {
-  CacheManager({required this.group});
+abstract class CacheApi {
+  const CacheApi(this.provider);
+  final dynamic provider;
+  FutureOr<bool> remove(String key);
+  FutureOr<bool> eraseDatabase();
+  FutureOr<bool> exist(String key);
+  FutureOr<JsonData?> get(String key);
+  FutureOr<bool> set(String key, String value);
+}
 
-  final String group;
+class CacheManager implements CacheApi {
+  CacheManager();
+  @override
+  final SharedPreferencesAsync provider = SharedPreferencesAsync();
 
-  late final provider = Hive.box<JsonData>(
-    encryptionKey: ServiceLocator.key,
-    name: group,
-  );
-
+  @override
   bool remove(String key) => provider.delete(key);
 
-  void eraseDatabase() => provider.clear();
+  @override
+  bool eraseDatabase() => provider.clear();
 
-  bool exist(String key) => provider.containsKey(key);
+  @override
+  Future<bool> exist(String key) => provider.containsKey(key);
 
-  JsonData? get(String key) => provider.get(key);
+  @override
+  Future<JsonData?> get(String key) => provider.get(key);
 
-  void set(String key, JsonData value) => provider.put(key, value);
+  @override
+  Future<bool> set(String key, JsonData value) => provider.put(key, value);
 }

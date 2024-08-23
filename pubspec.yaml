@@ -9,7 +9,6 @@ version: 1.0.0+1
 environment:
   sdk: ">=3.4.3 <4.0.0"
 
-# ignore: sort_pub_dependencies
 dependencies:
   flutter:
     sdk: flutter
@@ -29,6 +28,7 @@ dependencies:
   json_annotation: ^4.9.0
 
   # platform UI
+  yaru: ^4.1.0
   macos_ui: ^2.0.7
   fluent_ui: ^4.9.1
   system_theme: ^3.0.0
@@ -41,14 +41,12 @@ dependencies:
   riverpod_annotation: ^2.3.5
 
   # storage and sharing
-  hive: ^4.0.0-dev.2
   share_plus: ^10.0.2
   url_launcher: ^6.3.0
   path_provider: ^2.1.4
-  isar_flutter_libs: ^4.0.0-dev.13
   device_info_plus: ^10.1.2
   logger: ^2.4.0
-  yaru: ^4.1.0
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
