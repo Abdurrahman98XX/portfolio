@@ -1,29 +1,23 @@
 import 'dart:async';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:portfolio/src/base/base_entity.dart';
 
 abstract class CacheApi<P> {
   const CacheApi(this.provider);
-  final P provider;
-  FutureOr<Either<CacheError, JsonData>> pop(String key);
-  FutureOr<Either<CacheError, bool>> eraseDatabase();
-  FutureOr<Either<CacheError, bool>> exist(String key);
-  FutureOr<Either<CacheError, JsonData?>> get(String key);
-  FutureOr<Either<CacheError, bool>> set(String key, JsonData value);
+
+  final dynamic provider;
+  FutureOr<bool> remove(String key);
+  FutureOr<bool> eraseDatabase();
+  FutureOr<bool> exist(String key);
+  FutureOr<JsonData?> get(String key);
+  FutureOr<bool> set(String key, JsonData value);
 }
 
-class CacheManager extends CacheApi<FlutterSecureStorage> {
+class CacheManager extends CacheApi {
   const CacheManager(super.provider);
 
   @override
-  Future<Either<CacheError, bool>> pop(String key) async {
-    try {
-      await provider.delete(key: key);
-      return right(true);
-    } catch (e, st) {
-      return left(CacheDeleteError((e, st)));
-    }
+  Future<bool> remove(String key) async {
+     return  await provider.delete(key: key);
   }
 
   @override
@@ -39,25 +33,5 @@ class CacheManager extends CacheApi<FlutterSecureStorage> {
 
   @override
   Future<bool> set(String key, JsonData value) => provider.put(key, value);
-}
-
-sealed class CacheError {
-  const CacheError(this.error);
-  final (dynamic, StackTrace) error;
-}
-
-class CacheDeleteError extends CacheError {
-  const CacheDeleteError(super.error);
-}
-
-class CacheReadError extends CacheError {
-  const CacheReadError(super.error);
-}
-
-class CacheWriteError extends CacheError {
-  const CacheWriteError(super.error);
-}
-
-class CacheUpdateError extends CacheError {
-  const CacheUpdateError(super.error);
+  
 }
