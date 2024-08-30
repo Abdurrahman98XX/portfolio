@@ -88,31 +88,18 @@ class Worker {
   FutureOr<R> send<R>(R Function() handler, [_Who who = _Who.function]) async {
     // waits for setup
     await _isolateReady.future;
-    // time consumed calculator
-    DateTime? start;
-    Duration? duration;
-    if (useTimer) start = DateTime.now();
     // assign this handler to a unique id (key)
     final id = _stack.length;
     // build the request to be sent
-    final message = List.unmodifiable([id, handler, who == _Who.function]);
+    final message = [id, handler, who == _Who.function];
     // let the store have your message
-    _stack = List.unmodifiable([message]);
+    _stack.add(message);
     // send your message to worker
     _mainSendPort.send(message);
     // await for youe message's response that only matches id
     final result = (await responseStream.firstWhere((r) => r[0] == id))[1];
     // a complecated way of removing an item (message in this case)
-    _stack = List.unmodifiable(_stack.where((e) => id != e[id]));
-    // simple time diffrence calculation of consumed time
-    if (useTimer) duration = DateTime.now().difference(start!);
-    if (useTimer) {
-      log(
-        'request done in: ${duration!.inMilliseconds / 1000}S'
-        '\nresult is: $result',
-      );
-      log(_stack.toString());
-    }
+    _stack.removeWhere((e) => e[0] == id);
     // dumping result
     return result;
   }
@@ -135,7 +122,18 @@ class Worker {
       : send(() => message, _Who.value);
 
   // our request stack
-  List<List<dynamic>> _stack = List.unmodifiable([]);
+  final List<List> _stack = [];
 }
 
 enum _Who { value, function }
+
+FutureOr<T> timeElapsed<T>(FutureOr<T> Function() function) async {
+  final start = DateTime.now();
+  final result = await function();
+  final duration = DateTime.now().difference(start);
+  log(
+    'request done in: ${duration.inMilliseconds / 1000}S'
+    '\nresult is: $result',
+  );
+  return result;
+}
