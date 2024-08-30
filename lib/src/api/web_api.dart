@@ -1,3 +1,1 @@
-abstract class WebApi {
-  
-}
+abstract class WebApi {}

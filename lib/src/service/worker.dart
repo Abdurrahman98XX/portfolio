@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:isolate';
-
-import 'package:portfolio/src/service/service_locator.dart';
+import 'dart:developer';
 
 typedef RequestHandler = Function(dynamic request);
 
@@ -29,7 +28,8 @@ class Worker {
   late final responseStream = _mainReceivePort
       // if isolate is ready then filter out nulls and [SendPort]s
       // otherwise let it be as it is
-      .where((r) => _isolateReady.isCompleted ? r != null && r is! SendPort : true)
+      .where(
+          (r) => _isolateReady.isCompleted ? r != null && r is! SendPort : true)
       .asBroadcastStream();
 
   /// worker spawner and life-cycle controller
@@ -107,10 +107,11 @@ class Worker {
     // simple time diffrence calculation of consumed time
     if (useTimer) duration = DateTime.now().difference(start!);
     if (useTimer) {
-      ServiceLocator.logger.i(
+      log(
         'request done in: ${duration!.inMilliseconds / 1000}S'
         '\nresult is: $result',
       );
+      log(_stack.toString());
     }
     // dumping result
     return result;

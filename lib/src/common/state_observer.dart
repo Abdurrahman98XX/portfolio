@@ -1,5 +1,5 @@
+import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/src/service/service_locator.dart';
 
 class StateObserver implements ProviderObserver {
   @override
@@ -8,12 +8,15 @@ class StateObserver implements ProviderObserver {
     Object? value,
     ProviderContainer container,
   ) {
-    ServiceLocator.logger.i('${provider.name} Started\n' 'Init value:\n$value');
+    log('Started\n' 'Init value:\n$value', name: provider.name ?? 'Null');
   }
 
   @override
-  void didDisposeProvider(ProviderBase<Object?> provider, ProviderContainer container) {
-    ServiceLocator.logger.d('${provider.name} Closed\n');
+  void didDisposeProvider(
+    ProviderBase<Object?> provider,
+    ProviderContainer container,
+  ) {
+    log('Closed\n', name: provider.name ?? 'Null');
   }
 
   @override
@@ -23,10 +26,11 @@ class StateObserver implements ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) {
-    ServiceLocator.logger.i(
-      '${provider.name} Updated\n'
+    log(
+      'Updated\n'
       'Prev value:\n$previousValue\n'
       'New value:\n$newValue',
+      name: provider.name ?? 'Null',
     );
   }
 
@@ -37,8 +41,9 @@ class StateObserver implements ProviderObserver {
     StackTrace stackTrace,
     ProviderContainer container,
   ) {
-    ServiceLocator.logger.e(
-      '${provider.name} Failed\n',
+    log(
+      'Failed\n',
+      name: provider.name ?? 'Null',
       error: error,
       stackTrace: stackTrace,
     );
