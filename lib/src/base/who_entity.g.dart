@@ -1,34 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'color_source_entity.dart';
+part of 'who_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ColorSourceEntity _$ColorSourceEntityFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      'ColorSourceEntity',
+WhoEntity _$WhoEntityFromJson(Map<String, dynamic> json) => $checkedCreate(
+      'WhoEntity',
       json,
       ($checkedConvert) {
         $checkKeys(
           json,
           allowedKeys: const [
+            'who',
             'type',
             'name',
             'id',
             'vId',
             'createdAt',
             'modifiedAt',
-            'source'
+            'eWho'
           ],
         );
-        final val = ColorSourceEntity(
-          source:
-              $checkedConvert('source', (v) => $enumDecode(_$SourceEnumMap, v)),
-          name: $checkedConvert('name', (v) => v as String),
+        final val = WhoEntity(
+          who: $checkedConvert(
+              'who',
+              (v) => v == null
+                  ? null
+                  : WhoEntity.fromJson(v as Map<String, dynamic>)),
           id: $checkedConvert('id', (v) => v as String),
           vId: $checkedConvert('vId', (v) => v as String),
+          eWho: $checkedConvert('eWho', (v) => $enumDecode(_$WHOEnumMap, v)),
+          name: $checkedConvert('name', (v) => v as String),
           type: $checkedConvert('type', (v) => v as String),
           createdAt: $checkedConvert(
               'createdAt',
@@ -43,18 +47,19 @@ ColorSourceEntity _$ColorSourceEntityFromJson(Map<String, dynamic> json) =>
       },
     );
 
-Map<String, dynamic> _$ColorSourceEntityToJson(ColorSourceEntity instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$WhoEntityToJson(WhoEntity instance) => <String, dynamic>{
+      'who': instance.who?.toJson(),
       'type': instance.type,
       'name': instance.name,
       'id': instance.id,
       'vId': instance.vId,
       'createdAt': const EpochDateTimeConverter().toJson(instance.createdAt),
       'modifiedAt': const EpochDateTimeConverter().toJson(instance.modifiedAt),
-      'source': _$SourceEnumMap[instance.source]!,
+      'eWho': _$WHOEnumMap[instance.eWho]!,
     };
 
-const _$SourceEnumMap = {
-  Source.user: 'user',
-  Source.system: 'system',
+const _$WHOEnumMap = {
+  WHO.user: 'user',
+  WHO.defaults: 'defaults',
+  WHO.system: 'system',
 };

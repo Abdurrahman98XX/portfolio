@@ -7,12 +7,12 @@ part of 'color_source_controller.dart';
 // **************************************************************************
 
 String _$colorSourceControllerHash() =>
-    r'f1271e1e3a766cecb56553e27c282b87c072827f';
+    r'd91e010edef1f084872008d139a6c1908fca19b8';
 
 /// See also [ColorSourceController].
 @ProviderFor(ColorSourceController)
-final colorSourceControllerProvider = AutoDisposeNotifierProvider<
-    ColorSourceController, ColorSourceEntity>.internal(
+final colorSourceControllerProvider =
+    AutoDisposeNotifierProvider<ColorSourceController, WhoEntity>.internal(
   ColorSourceController.new,
   name: r'colorSourceControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final colorSourceControllerProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$ColorSourceController = AutoDisposeNotifier<ColorSourceEntity>;
+typedef _$ColorSourceController = AutoDisposeNotifier<WhoEntity>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

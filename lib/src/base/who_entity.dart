@@ -1,42 +1,45 @@
+import 'package:portfolio/src/base/base_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
-import 'package:portfolio/src/base/base_entity.dart';
-part 'color_source_entity.g.dart';
+part 'who_entity.g.dart';
 
 @JsonSerializable(converters: converters)
-class ColorSourceEntity extends BaseEntity {
-  const ColorSourceEntity({
-    required this.source,
-    required super.name,
+class WhoEntity extends BaseEntity {
+  const WhoEntity({
+    super.who,
     required super.id,
     required super.vId,
+    required this.eWho,
+    required super.name,
     required super.type,
     required super.createdAt,
     required super.modifiedAt,
   });
 
-  final Source source;
+  final WHO eWho;
 
-  factory ColorSourceEntity.fromJson(JsonData json) => _$ColorSourceEntityFromJson(json);
-
-  @override
-  JsonData toJson() => _$ColorSourceEntityToJson(this);
+  factory WhoEntity.fromJson(JsonData json) => _$WhoEntityFromJson(json);
 
   @override
-  ColorSourceEntity copyWith({
-    Source? source,
-    String? name,
+  JsonData toJson() => _$WhoEntityToJson(this);
+
+  @override
+  WhoEntity copyWith({
+    WHO? eWho,
     String? id,
     String? vId,
+    String? name,
     String? type,
+    WhoEntity? who,
     DateTime? createdAt,
     DateTime? modifiedAt,
   }) {
-    return ColorSourceEntity(
-      source: source ?? this.source,
-      name: name ?? this.name,
+    return WhoEntity(
       id: id ?? this.id,
+      who: who ?? this.who,
       vId: vId ?? this.vId,
+      eWho: eWho ?? this.eWho,
+      name: name ?? this.name,
       type: type ?? this.type,
       createdAt: createdAt ?? this.createdAt,
       modifiedAt: modifiedAt ?? this.modifiedAt,
@@ -44,5 +47,5 @@ class ColorSourceEntity extends BaseEntity {
   }
 
   @override
-  List get equality => [source];
+  List get equality => [eWho];
 }

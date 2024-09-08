@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:portfolio/src/base/who_entity.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
 import 'package:portfolio/src/base/base_entity.dart';
 part 'user_color_entity.g.dart';
@@ -7,29 +8,32 @@ part 'user_color_entity.g.dart';
 @JsonSerializable(converters: converters)
 class UserColorEntity extends BaseEntity {
   const UserColorEntity({
-    required this.userColor,
-    required super.name,
+    super.who,
     required super.id,
     required super.vId,
+    required super.name,
     required super.type,
+    required this.userColor,
     required super.createdAt,
     required super.modifiedAt,
   });
 
   final Color userColor;
 
-  factory UserColorEntity.fromJson(JsonData json) => _$UserColorEntityFromJson(json);
+  factory UserColorEntity.fromJson(JsonData json) =>
+      _$UserColorEntityFromJson(json);
 
   @override
   JsonData toJson() => _$UserColorEntityToJson(this);
 
   @override
   UserColorEntity copyWith({
-    Color? userColor,
-    String? name,
     String? id,
     String? vId,
+    String? name,
     String? type,
+    WhoEntity? who,
+    Color? userColor,
     DateTime? createdAt,
     DateTime? modifiedAt,
   }) {
@@ -41,6 +45,7 @@ class UserColorEntity extends BaseEntity {
       type: type ?? this.type,
       createdAt: createdAt ?? this.createdAt,
       modifiedAt: modifiedAt ?? this.modifiedAt,
+      who: who ?? this.who,
     );
   }
 

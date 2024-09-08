@@ -258,18 +258,18 @@ packages:
     dependency: "direct dev"
     description:
       name: custom_lint
-      sha256: "4939d89e580c36215e48a7de8fd92f22c79dcc3eb11fda84f3402b3b45aec663"
+      sha256: "6e1ec47427ca968f22bce734d00028ae7084361999b41673291138945c5baca0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.7"
   custom_lint_builder:
     dependency: transitive
     description:
       name: custom_lint_builder
-      sha256: d9e5bb63ed52c1d006f5a1828992ba6de124c27a531e8fba0a31afffa81621b3
+      sha256: ba2f90fff4eff71d202d097eb14b14f87087eaaef742e956208c0eb9d3a40a21
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.7"
   custom_lint_core:
     dependency: transitive
     description:
@@ -654,10 +654,10 @@ packages:
     dependency: "direct main"
     description:
       name: macos_ui
-      sha256: "5238460b083411af1c6f2f6cb4771a7af82a3ecf5249b35ad7ac0013bcc93cef"
+      sha256: "80f6539aba5a3a1182d5225a6c27969a780bcb1d2d8135b4ffb708570cf0c854"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.8"
+    version: "2.0.9"
   macos_window_utils:
     dependency: transitive
     description:
@@ -1139,10 +1139,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: "83d37c7ad7aaf9aa8e275490669535c8080377cfa7a7004c24dfac53afffaa90"
+      sha256: f33d6bb662f0e4f79dcd7ada2e6170f3b3a2530c28fc41f49a411ddedd576a77
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.2"
+    version: "4.5.0"
   vector_math:
     dependency: transitive
     description:

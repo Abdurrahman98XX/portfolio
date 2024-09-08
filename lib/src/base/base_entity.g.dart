@@ -8,6 +8,7 @@ part of 'base_entity.dart';
 
 Map<String, dynamic> _$BaseEntityToJson(BaseEntity instance) =>
     <String, dynamic>{
+      'who': instance.who?.toJson(),
       'type': instance.type,
       'name': instance.name,
       'id': instance.id,

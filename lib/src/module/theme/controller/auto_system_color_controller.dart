@@ -14,7 +14,7 @@ Stream<Color> autoSystemColor(
 }) async* {
   final autoColorAbilityWatcher = ref.watch(autoSystemColorAbilityProvider);
   final colorSourceWatcher =
-      ref.watch(colorSourceControllerProvider).source == Source.system;
+      ref.watch(colorSourceControllerProvider).eWho != WHO.user;
   if (autoColorAbilityWatcher && colorSourceWatcher) {
     if (KPlatform.isWindows) {
       yield* SystemTheme.onChange.map((c) => c.accent);

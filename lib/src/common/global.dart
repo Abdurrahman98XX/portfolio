@@ -17,7 +17,7 @@ abstract interface class Global {
   ];
   // TODO: update generative title
   static String onGenerateTitle(BuildContext context) {
-    return AppLocalizations.of(context)!.appTitle;
+    return context.l10n.appTitle;
   }
 
   static Digest encrypt(List<String> messages) {

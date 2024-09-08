@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:portfolio/src/base/who_entity.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
 
 part 'base_entity.g.dart';
 
-// CheckedFromJsonException is thrown when the JSON is not valid
-// UnrecognizedKeysException is thrown when the JSON has unrecognized keys
-
+// TODO: whenever Making an entity, always use `BaseEntity`
+// HACK: add every new `property` you declare to the `equality` list
+// TODO: update `copyWith()` to match with the constuctor
 /// This class provides common properties and methods that are shared by all entities.
 ///
 /// It serves as a base class for other entity classes in the application.
@@ -15,11 +16,9 @@ part 'base_entity.g.dart';
   ignoreUnannotated: true,
   converters: converters,
 )
-// TODO: whenever Making an entity use `BaseEntity`
-// HACK: add every new `property` you declare to the `equality` list
-// TODO: update `copyWith()` to match with the constuctor
 abstract class BaseEntity extends Equatable {
   const BaseEntity({
+    this.who,
     required this.name,
     required this.id,
     required this.vId,
@@ -34,7 +33,12 @@ abstract class BaseEntity extends Equatable {
     String? type,
     DateTime? createdAt,
     DateTime? modifiedAt,
+    WhoEntity? who,
   });
+
+  /// Who created the objects
+  @JsonKey(includeToJson: true)
+  final WhoEntity? who;
 
   /// The type of the entity
   @JsonKey(includeToJson: true)
@@ -61,7 +65,9 @@ abstract class BaseEntity extends Equatable {
   final DateTime modifiedAt;
 
   @override
-  List get props => [name, id, vId, type, createdAt, modifiedAt, ...equality];
+  List get props => [..._base, ...equality];
+
+  List get _base => [name, id, vId, type, createdAt, modifiedAt, who];
 
   /// define every property that is not in the [props] list
   ///
@@ -73,5 +79,7 @@ abstract class BaseEntity extends Equatable {
 }
 
 enum Source { user, system }
+
+enum WHO { user, defaults, system }
 
 typedef JsonData = Map<String, dynamic>;
