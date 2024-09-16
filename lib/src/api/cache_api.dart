@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:portfolio/src/base/base_entity.dart';
+import 'package:portfolio/src/entity/base_entity.dart';
 import 'package:portfolio/src/service/service_locator.dart';
 
 abstract class CacheApi<P> {

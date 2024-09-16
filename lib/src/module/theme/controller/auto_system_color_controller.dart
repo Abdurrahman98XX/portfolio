@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:portfolio/src/common/global.dart';
-import 'package:portfolio/src/base/base_entity.dart';
+import 'package:portfolio/src/entity/base_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:portfolio/src/module/theme/controller/color_source_controller.dart';
 part 'auto_system_color_controller.g.dart';

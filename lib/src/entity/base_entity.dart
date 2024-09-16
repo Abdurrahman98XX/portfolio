@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:portfolio/src/base/who_entity.dart';
+import 'package:portfolio/src/entity/who_entity.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
 
 part 'base_entity.g.dart';
@@ -18,7 +18,7 @@ part 'base_entity.g.dart';
 )
 abstract class BaseEntity extends Equatable {
   const BaseEntity({
-    this.who,
+    required this.who,
     required this.name,
     required this.id,
     required this.vId,

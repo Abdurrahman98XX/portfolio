@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:portfolio/src/base/who_entity.dart';
+import 'package:portfolio/src/entity/who_entity.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
-import 'package:portfolio/src/base/base_entity.dart';
+import 'package:portfolio/src/entity/base_entity.dart';
 part 'theme_mode_entity.g.dart';
 
 @JsonSerializable(converters: converters)

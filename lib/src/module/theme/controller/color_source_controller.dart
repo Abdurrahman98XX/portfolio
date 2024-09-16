@@ -1,5 +1,5 @@
-import 'package:portfolio/src/base/base_entity.dart';
-import 'package:portfolio/src/base/who_entity.dart';
+import 'package:portfolio/src/entity/base_entity.dart';
+import 'package:portfolio/src/entity/who_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'color_source_controller.g.dart';
 
