@@ -27,10 +27,13 @@ abstract class AppInterface extends StatelessWidget {
 }
 
 class AdaptiveApp extends StatelessWidget {
-  const AdaptiveApp({super.key, this.usePlatform});
-  final TargetPlatform? usePlatform;
+  const AdaptiveApp({super.key
+      // , this.usePlatform
+      });
+  final TargetPlatform? usePlatform = TargetPlatform.android;
   @override
   Widget build(BuildContext context) {
+    print('------------------- ROUTER AND ALL APP REBUILT -------------------');
     return Consumer(
       key: key,
       builder: (context, ref, child) =>

@@ -12,7 +12,7 @@ class IosApp extends AppInterface {
       locale: locale,
       actions: actions,
       shortcuts: shortcuts,
-      routerConfig: routerConfig,
+      // routerConfig: routerConfig,
       onGenerateTitle: onGenerateTitle,
       supportedLocales: supportedLocales,
       restorationScopeId: restorationScopeId,

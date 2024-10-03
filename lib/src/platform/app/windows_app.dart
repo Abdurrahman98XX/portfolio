@@ -12,7 +12,7 @@ class WindowsApp extends AppInterface {
       actions: actions,
       shortcuts: shortcuts,
       themeMode: themeMode,
-      routerConfig: routerConfig,
+      // routerConfig: routerConfig,
       theme: FluentThemeData.light(),
       onGenerateTitle: onGenerateTitle,
       darkTheme: FluentThemeData.dark(),

@@ -11,7 +11,7 @@ class MacosApp extends AppInterface {
       locale: locale,
       actions: actions,
       themeMode: themeMode,
-      routerConfig: routerConfig,
+      // routerConfig: routerConfig,
       theme: m.MacosThemeData.light(),
       onGenerateTitle: onGenerateTitle,
       supportedLocales: supportedLocales,

@@ -8,8 +8,12 @@ import 'package:portfolio/src/localization/localization.dart';
 
 abstract interface class Global {
   static const appId = 'com.atumra.portfolio';
-  static final navigatorKey = GlobalKey<NavigatorState>();
-  static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+  static final navigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: 'navigatorKey',
+  );
+  static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>(
+    debugLabel: 'scaffoldMessengerKey',
+  );
   static const localizations = [
     AppLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
@@ -41,18 +45,18 @@ abstract interface class Global {
   }
 }
 
-class KPlatform {
+abstract interface class KPlatform {
   static const isBrowser = kIsWeb || kIsWasm;
   static final isMobile = isAndroid || isIOS;
   static final isDesktop = isMacOS || isWindows || isLinux;
-  static final isIOS = !isBrowser && target == TargetPlatform.iOS;
-  static final isAndroid = !isBrowser && target == TargetPlatform.android;
-  static final isMacOS = !isBrowser && target == TargetPlatform.macOS;
-  static final isLinux = !isBrowser && target == TargetPlatform.linux;
-  static final isWindows = !isBrowser && target == TargetPlatform.windows;
+  static final isIOS = !isBrowser && host == TargetPlatform.iOS;
+  static final isAndroid = !isBrowser && host == TargetPlatform.android;
+  static final isMacOS = !isBrowser && host == TargetPlatform.macOS;
+  static final isLinux = !isBrowser && host == TargetPlatform.linux;
+  static final isWindows = !isBrowser && host == TargetPlatform.windows;
   static final isCanvasKitEnabled = isCanvasKit;
-  static final target = defaultTargetPlatform;
-  static final targetName = isBrowser ? 'browser' : target.name;
+  static final host = defaultTargetPlatform;
+  static final targetName = isBrowser ? 'browser' : host.name;
   static final isApple = isMacOS || isIOS;
   static bool get isLight =>
       PlatformDispatcher.instance.platformBrightness == Brightness.light;
