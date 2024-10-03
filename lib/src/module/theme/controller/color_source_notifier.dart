@@ -1,10 +1,12 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/src/entity/base_entity.dart';
 import 'package:portfolio/src/entity/who_entity.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'color_source_controller.g.dart';
 
-@riverpod
-class ColorSourceController extends _$ColorSourceController {
+class ColorSourceNotifier extends Notifier<WhoEntity> {
+  static final provider = NotifierProvider<ColorSourceNotifier, WhoEntity>(
+    ColorSourceNotifier.new,
+    name: 'ColorSourceNotifier',
+  );
   @override
   WhoEntity build() {
     return WhoEntity(

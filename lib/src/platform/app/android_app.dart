@@ -1,58 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/src/platform/app/adaptive_app.dart';
+import 'package:portfolio/src/platform/router/android_router.dart';
 
-class AndroidApp extends StatelessWidget {
-  const AndroidApp({
-    super.key,
-    this.backButtonDispatcher,
-    this.darkTheme,
-    this.theme,
-    this.locale,
-    this.onGenerateTitle,
-    this.scaffoldMessengerKey,
-    this.localizationsDelegates,
-    this.restorationScopeId,
-    this.routeInformationParser,
-    this.routeInformationProvider,
-    this.routerDelegate,
-    this.supportedLocales = const <Locale>[Locale('en', 'US')],
-    this.themeMode,
-    this.shortcuts,
-    this.actions,
-  });
-  final BackButtonDispatcher? backButtonDispatcher;
-  final ThemeData? darkTheme;
-  final ThemeData? theme;
-  final Locale? locale;
-  final String Function(BuildContext)? onGenerateTitle;
-  final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
-  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
-  final String? restorationScopeId;
-  final Map<ShortcutActivator, Intent>? shortcuts;
-  final RouteInformationParser<Object>? routeInformationParser;
-  final RouteInformationProvider? routeInformationProvider;
-  final RouterDelegate<Object>? routerDelegate;
-  final Iterable<Locale> supportedLocales;
-  final ThemeMode? themeMode;
-  final Map<Type, Action<Intent>>? actions;
+class AndroidApp extends AppInterface {
+  AndroidApp({super.key, required super.ref});
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      backButtonDispatcher: backButtonDispatcher,
-      actions: {...WidgetsApp.defaultActions, ...?actions},
-      darkTheme: darkTheme,
-      theme: theme,
       key: key,
+      theme: theme,
       locale: locale,
-      onGenerateTitle: onGenerateTitle,
-      scaffoldMessengerKey: scaffoldMessengerKey,
-      localizationsDelegates: localizationsDelegates,
-      restorationScopeId: restorationScopeId,
-      routeInformationParser: routeInformationParser,
-      routeInformationProvider: routeInformationProvider,
-      routerDelegate: routerDelegate,
-      supportedLocales: supportedLocales,
+      actions: actions,
+      darkTheme: darkTheme,
+      shortcuts: shortcuts,
       themeMode: themeMode,
-      shortcuts: {...WidgetsApp.defaultShortcuts, ...?shortcuts},
+      onGenerateTitle: onGenerateTitle,
+      supportedLocales: supportedLocales,
+      restorationScopeId: restorationScopeId,
+      scaffoldMessengerKey: scaffoldMessengerKey,
+      routerConfig: ref.watch(androidRouterProvider),
+      localizationsDelegates: localizationsDelegates,
     );
   }
 }

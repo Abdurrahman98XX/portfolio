@@ -1,11 +1,13 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/src/common/global.dart';
 import 'package:portfolio/src/module/theme/model/theme_mode_entity.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'theme_mode_controller.g.dart';
 
-@riverpod
-class ThemeModeController extends _$ThemeModeController {
+class ThemeModeNotifier extends Notifier<ThemeModeEntity> {
+  static final provider = NotifierProvider<ThemeModeNotifier, ThemeModeEntity>(
+    ThemeModeNotifier.new,
+    name: 'ThemeModeNotifier',
+  );
   @override
   ThemeModeEntity build() {
     return ThemeModeEntity(

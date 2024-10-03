@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/src/module/theme/model/user_color_entity.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'user_color_controller.g.dart';
 
-@riverpod
-class UserColorController extends _$UserColorController {
+class UserColorController extends Notifier<UserColorEntity> {
+  static final provider =
+      NotifierProvider<UserColorController, UserColorEntity>(
+    UserColorController.new,
+    name: 'UserColorController',
+  );
   @override
   UserColorEntity build() {
     return UserColorEntity(

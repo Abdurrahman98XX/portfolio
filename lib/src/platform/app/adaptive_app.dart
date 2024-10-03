@@ -1,98 +1,46 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/src/common/global.dart';
 import 'package:portfolio/src/localization/localization.dart';
-import 'package:portfolio/src/module/theme/controller/theme_mode_controller.dart';
+import 'package:portfolio/src/module/theme/controller/theme_mode_notifier.dart';
 import 'package:portfolio/src/platform/app/android_app.dart';
 import 'package:portfolio/src/platform/app/ios_app.dart';
 import 'package:portfolio/src/platform/app/linux_app.dart';
 import 'package:portfolio/src/platform/app/macos_app.dart';
 import 'package:portfolio/src/platform/app/windows_app.dart';
-import 'package:portfolio/src/service/service_locator.dart';
+
+abstract class AppInterface extends StatelessWidget {
+  AppInterface({super.key, required this.ref});
+  final WidgetRef ref;
+  final Locale? locale = null;
+  final theme = ThemeData();
+  final darkTheme = ThemeData.dark();
+  final restorationScopeId = Global.appId;
+  final onGenerateTitle = Global.onGenerateTitle;
+  final actions = {...WidgetsApp.defaultActions};
+  final shortcuts = {...WidgetsApp.defaultShortcuts};
+  final scaffoldMessengerKey = Global.scaffoldMessengerKey;
+  final supportedLocales = AppLocalizations.supportedLocales;
+  late final themeMode = ref.watch(ThemeModeNotifier.provider).themeMode;
+  final localizationsDelegates = AppLocalizations.localizationsDelegates;
+}
 
 class AdaptiveApp extends StatelessWidget {
-  const AdaptiveApp({super.key, this.testPlatform});
-  final TargetPlatform? testPlatform;
+  const AdaptiveApp({super.key, this.usePlatform});
+  final TargetPlatform? usePlatform;
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, ref, child) {
-        final watchThemeMode = ref.watch(themeModeControllerProvider);
-        // final watchColorSource = ref.watch(colorSourceControllerProvider);
-        // final watchAutoColor = ref.watch(autoSystemColorProvider());
-        // final watchUserColor = ref.watch(userColorControllerProvider);
-        return switch (testPlatform ?? defaultTargetPlatform) {
-          TargetPlatform.android => AndroidApp(
-              themeMode: watchThemeMode.themeMode,
-              routeInformationParser:
-                  ServiceLocator.router.routeInformationParser,
-              routeInformationProvider:
-                  ServiceLocator.router.routeInformationProvider,
-              routerDelegate: ServiceLocator.router.routerDelegate,
-              backButtonDispatcher: ServiceLocator.router.backButtonDispatcher,
-              supportedLocales: AppLocalizations.supportedLocales,
-              onGenerateTitle: Global.onGenerateTitle,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              restorationScopeId: Global.appId,
-            ),
-          TargetPlatform.iOS => IosApp(
-              themeMode: watchThemeMode.themeMode,
-              routeInformationParser:
-                  ServiceLocator.router.routeInformationParser,
-              routeInformationProvider:
-                  ServiceLocator.router.routeInformationProvider,
-              routerDelegate: ServiceLocator.router.routerDelegate,
-              supportedLocales: AppLocalizations.supportedLocales,
-              backButtonDispatcher: ServiceLocator.router.backButtonDispatcher,
-              onGenerateTitle: Global.onGenerateTitle,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              restorationScopeId: Global.appId,
-            ),
-          TargetPlatform.linux => LinuxApp(
-              child: AndroidApp(
-                themeMode: watchThemeMode.themeMode,
-                routeInformationParser:
-                    ServiceLocator.router.routeInformationParser,
-                routeInformationProvider:
-                    ServiceLocator.router.routeInformationProvider,
-                supportedLocales: AppLocalizations.supportedLocales,
-                routerDelegate: ServiceLocator.router.routerDelegate,
-                backButtonDispatcher:
-                    ServiceLocator.router.backButtonDispatcher,
-                onGenerateTitle: Global.onGenerateTitle,
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                restorationScopeId: Global.appId,
-              ),
-            ),
-          TargetPlatform.macOS => MacosApp(
-              themeMode: watchThemeMode.themeMode,
-              routeInformationParser:
-                  ServiceLocator.router.routeInformationParser,
-              supportedLocales: AppLocalizations.supportedLocales,
-              routeInformationProvider:
-                  ServiceLocator.router.routeInformationProvider,
-              routerDelegate: ServiceLocator.router.routerDelegate,
-              backButtonDispatcher: ServiceLocator.router.backButtonDispatcher,
-              onGenerateTitle: Global.onGenerateTitle,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              restorationScopeId: Global.appId,
-            ),
-          TargetPlatform.windows => WindowsApp(
-              themeMode: watchThemeMode.themeMode,
-              supportedLocales: AppLocalizations.supportedLocales,
-              routeInformationParser:
-                  ServiceLocator.router.routeInformationParser,
-              routeInformationProvider:
-                  ServiceLocator.router.routeInformationProvider,
-              routerDelegate: ServiceLocator.router.routerDelegate,
-              backButtonDispatcher: ServiceLocator.router.backButtonDispatcher,
-              onGenerateTitle: Global.onGenerateTitle,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              restorationScopeId: Global.appId,
-            ),
-          _ => throw 'who the fuck uses fuchsia',
-        };
+      key: key,
+      builder: (context, ref, child) =>
+          switch (usePlatform ?? defaultTargetPlatform) {
+        TargetPlatform.iOS => IosApp(ref: ref),
+        TargetPlatform.macOS => MacosApp(ref: ref),
+        TargetPlatform.android => AndroidApp(ref: ref),
+        TargetPlatform.windows => WindowsApp(ref: ref),
+        TargetPlatform.linux => LinuxApp(ref: ref, child: AndroidApp(ref: ref)),
+        _ => throw 'who the fuck uses fuchsia',
       },
     );
   }

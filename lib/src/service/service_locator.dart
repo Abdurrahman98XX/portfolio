@@ -1,17 +1,13 @@
 import 'dart:async';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 import 'package:macos_ui/macos_ui.dart';
 import 'package:portfolio/src/api/cache_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:system_theme/system_theme.dart';
-
 import 'package:portfolio/src/common/global.dart';
-import 'package:portfolio/src/service/router.dart';
 import 'package:portfolio/src/service/worker.dart';
 import 'package:yaru/yaru.dart';
 
@@ -29,16 +25,7 @@ abstract interface class ServiceLocator {
 
     // TODO: always register services here
     getIt.registerSingleton(Client(), dispose: (i) => i.close());
-    getIt.registerSingleton(globalRouter, dispose: (i) => i.dispose());
-    getIt.registerSingleton(
-      const CacheManager(
-        FlutterSecureStorage(
-          aOptions: AndroidOptions(encryptedSharedPreferences: true),
-        ),
-      ),
-      dispose: (i) => i.provider.unregisterAllListeners(),
-    );
-
+    getIt.registerSingleton(CacheManager(SharedPreferencesAsync()));
     getIt.registerSingleton(
       Worker(),
       instanceName: '1',
@@ -47,10 +34,8 @@ abstract interface class ServiceLocator {
   }
 
   static final client = getIt.get<Client>();
-  static final router = getIt.get<GoRouter>();
   static final worker = getIt.get<Worker>(instanceName: '1');
+  static final cache = getIt.get<CacheManager>();
   //
   static final getIt = GetIt.I;
-  static String get key =>
-      Global.encrypt([KPlatform.targetName, Global.appId]).toString();
 }

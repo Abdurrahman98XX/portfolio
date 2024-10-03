@@ -1,9 +1,9 @@
 // ignore_for_file: unused_catch_stack
-
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:developer';
 import 'package:portfolio/src/entity/base_entity.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:portfolio/src/service/service_locator.dart';
 
 abstract class CacheApi<P> {
@@ -17,50 +17,43 @@ abstract class CacheApi<P> {
   FutureOr<bool> set(String key, JsonData value);
 }
 
-class CacheManager extends CacheApi<FlutterSecureStorage> {
+class CacheManager extends CacheApi<SharedPreferencesAsync> {
   const CacheManager(super.provider);
 
   @override
-  Future<bool> remove(String key) async {
-    try {
-      await provider.delete(key: key);
-      return true;
-    } catch (e, st) {
-      return false;
-    }
-  }
+  Future<bool> remove(String key) => handleAsync(() => provider.remove(key));
 
   @override
-  Future<bool> eraseDatabase() async {
-    try {
-      await provider.deleteAll();
-      return true;
-    } catch (e, st) {
-      return false;
-    }
-  }
+  Future<bool> eraseDatabase() => handleAsync(() => provider.clear());
 
   @override
-  Future<bool> exist(String key) => provider.containsKey(key: key);
+  Future<bool> exist(String key) =>
+      handleAsync(() => provider.containsKey(key));
 
   @override
   Future<T?> get<T>(String key, T Function(JsonData json) fromJson) async {
     try {
-      final cache = await provider.read(key: key);
-      return await ServiceLocator.worker.send(
-        () => cache != null ? fromJson(jsonDecode(cache)) : null,
-      );
+      final cache = await provider.getString(key);
+      return cache == null
+          ? null
+          : ServiceLocator.worker.send(() => fromJson(jsonDecode(cache)));
     } catch (e, st) {
+      log('Error', name: '$runtimeType', error: e, stackTrace: st);
       return null;
     }
   }
 
   @override
-  Future<bool> set(String key, JsonData value) async {
+  Future<bool> set(String key, JsonData value) =>
+      handleAsync(() => provider.setString(key, value.toString()));
+
+  Future<bool> handleAsync(Future Function() fun) async {
     try {
-      await provider.write(key: key, value: value.toString());
+      if (fun is Future<bool> Function()) return await fun();
+      await fun();
       return true;
     } catch (e, st) {
+      log('Error', name: '$runtimeType', error: e, stackTrace: st);
       return false;
     }
   }

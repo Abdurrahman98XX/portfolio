@@ -3,49 +3,40 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StateObserver implements ProviderObserver {
   @override
-  void didAddProvider(
-    ProviderBase<Object?> provider,
-    Object? value,
-    ProviderContainer container,
-  ) {
-    log('Started\n' 'Init value:\n$value', name: provider.name ?? 'Null');
-  }
-
-  @override
-  void didDisposeProvider(
-    ProviderBase<Object?> provider,
-    ProviderContainer container,
-  ) {
-    log('Closed\n', name: provider.name ?? 'Null');
-  }
-
-  @override
-  void didUpdateProvider(
-    ProviderBase<Object?> provider,
-    Object? previousValue,
-    Object? newValue,
-    ProviderContainer container,
-  ) {
+  void didAddProvider(ProviderBase<Object?> provider, Object? value,
+      ProviderContainer container) {
     log(
-      'Updated\n'
-      'Prev value:\n$previousValue\n'
-      'New value:\n$newValue',
-      name: provider.name ?? 'Null',
+      'started 🆙: $value',
+      name: '${provider.name}',
+      time: DateTime.now(),
     );
   }
 
   @override
-  void providerDidFail(
-    ProviderBase<Object?> provider,
-    Object error,
-    StackTrace stackTrace,
-    ProviderContainer container,
-  ) {
+  void didDisposeProvider(
+      ProviderBase<Object?> provider, ProviderContainer container) {
+    log('closed ❌', name: '${provider.name}', time: DateTime.now());
+  }
+
+  @override
+  void didUpdateProvider(ProviderBase<Object?> provider, Object? was,
+      Object? now, ProviderContainer container) {
     log(
-      'Failed\n',
-      name: provider.name ?? 'Null',
-      error: error,
+      'updated: ♻️\nwas: $was\nnow: $now',
+      name: '${provider.name}',
+      time: DateTime.now(),
+    );
+  }
+
+  @override
+  void providerDidFail(ProviderBase<Object?> provider, Object error,
+      StackTrace stackTrace, ProviderContainer container) {
+    log(
+      'error 🚫',
+      name: '${provider.name}',
+      time: DateTime.now(),
       stackTrace: stackTrace,
+      error: error,
     );
   }
 }

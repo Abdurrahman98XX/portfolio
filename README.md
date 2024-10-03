@@ -20,3 +20,5 @@
 - never use string literals for UI, use localization
 
 a pub to be add {connectivity_plus}
+
+to embed cronet in android without 

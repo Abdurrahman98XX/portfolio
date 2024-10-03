@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:convert/convert.dart';
@@ -15,6 +16,15 @@ abstract interface class Global {
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
   ];
+
+  static FutureOr<({T result, Duration duration})> timeElapsed<T>(
+      FutureOr<T> Function() function) async {
+    final start = DateTime.now();
+    final result = await function();
+    final duration = DateTime.now().difference(start);
+    return (result: result, duration: duration);
+  }
+
   // TODO: update generative title
   static String onGenerateTitle(BuildContext context) {
     return context.l10n.appTitle;
@@ -40,9 +50,10 @@ class KPlatform {
   static final isMacOS = !isBrowser && target == TargetPlatform.macOS;
   static final isLinux = !isBrowser && target == TargetPlatform.linux;
   static final isWindows = !isBrowser && target == TargetPlatform.windows;
+  static final isCanvasKitEnabled = isCanvasKit;
   static final target = defaultTargetPlatform;
   static final targetName = isBrowser ? 'browser' : target.name;
-  static final isCanvasKitEnabled = isCanvasKit;
+  static final isApple = isMacOS || isIOS;
   static bool get isLight =>
       PlatformDispatcher.instance.platformBrightness == Brightness.light;
 }
