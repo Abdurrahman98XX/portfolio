@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:portfolio/src/platform/app/adaptive_app.dart';
+import 'package:portfolio/src/platform/app_adaptive.dart';
 import 'package:yaru/yaru.dart';
 
 class LinuxApp extends AppInterface {

@@ -1,9 +1,4 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:crypto/crypto.dart';
-import 'package:convert/convert.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:portfolio/src/localization/localization.dart';
 
 abstract interface class Global {
@@ -21,43 +16,8 @@ abstract interface class Global {
     GlobalCupertinoLocalizations.delegate,
   ];
 
-  static FutureOr<({T result, Duration duration})> timeElapsed<T>(
-      FutureOr<T> Function() function) async {
-    final start = DateTime.now();
-    final result = await function();
-    final duration = DateTime.now().difference(start);
-    return (result: result, duration: duration);
-  }
-
   // TODO: update generative title
   static String onGenerateTitle(BuildContext context) {
     return context.l10n.appTitle;
   }
-
-  static Digest encrypt(List<String> messages) {
-    final output = AccumulatorSink<Digest>();
-    var input = sha512256.startChunkedConversion(output);
-    // ignore: curly_braces_in_flow_control_structures
-    for (var message in messages) input.add(utf8.encode(message));
-    input.close();
-    final digest = output.events.single;
-    return digest;
-  }
-}
-
-abstract interface class KPlatform {
-  static const isBrowser = kIsWeb || kIsWasm;
-  static final isMobile = isAndroid || isIOS;
-  static final isDesktop = isMacOS || isWindows || isLinux;
-  static final isIOS = !isBrowser && host == TargetPlatform.iOS;
-  static final isAndroid = !isBrowser && host == TargetPlatform.android;
-  static final isMacOS = !isBrowser && host == TargetPlatform.macOS;
-  static final isLinux = !isBrowser && host == TargetPlatform.linux;
-  static final isWindows = !isBrowser && host == TargetPlatform.windows;
-  static final isCanvasKitEnabled = isCanvasKit;
-  static final host = defaultTargetPlatform;
-  static final targetName = isBrowser ? 'browser' : host.name;
-  static final isApple = isMacOS || isIOS;
-  static bool get isLight =>
-      PlatformDispatcher.instance.platformBrightness == Brightness.light;
 }

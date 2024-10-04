@@ -1,0 +1,7 @@
+{
+  "appTitle": "بورتفوليو",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "مرحباً بكم"
+}

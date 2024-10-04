@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/src/common/global.dart';
+import 'package:portfolio/src/common/platform.dart';
 import 'package:portfolio/src/module/theme/model/theme_mode_entity.dart';
 
 class ThemeModeNotifier extends Notifier<ThemeModeEntity> {

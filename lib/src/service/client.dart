@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:http/http.dart';
 import 'package:cronet_http/cronet_http.dart';
 import 'package:fetch_client/fetch_client.dart';
-import 'package:portfolio/src/common/global.dart';
 import 'package:cupertino_http/cupertino_http.dart';
+import 'package:portfolio/src/common/platform.dart';
 
 class KClient extends BaseClient {
   KClient(this.provider);

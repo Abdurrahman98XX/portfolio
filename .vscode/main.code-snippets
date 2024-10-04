@@ -1,4 +1,12 @@
 {
+	"cacheKey": {
+		"scope": "dart",
+		"prefix": "cacheKey",
+		"body": [
+			"final CacheKey ${1:Name} = const CacheKey('${1:Name}');",
+			""
+		]
+	},
 	"json": {
 		"scope": "dart",
 		"prefix": "entity",

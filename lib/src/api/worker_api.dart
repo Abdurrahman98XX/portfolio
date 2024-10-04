@@ -3,8 +3,8 @@ import 'dart:isolate';
 
 typedef RequestHandler = Function(dynamic request);
 
-class Worker {
-  Worker({this.handleRequest, this.useTimer = true}) {
+class WorkerApi {
+  WorkerApi({this.handleRequest, this.useTimer = true}) {
     // run the [Isolate.spawn]
     (() => controller)();
     // listen to the first response in order to complete setup
@@ -86,7 +86,7 @@ class Worker {
   /// CAUTION: NEVER USE THIS METHOD WHILE NOT DEFINING [handleRequest] PROP
   ///
   /// send a request/message to be computed using
-  /// the predefined [Worker.handleRequest] prop
+  /// the predefined [WorkerApi.handleRequest] prop
   ///
   /// ```
   /// final worker = Worker( handleRequest: (request) async {

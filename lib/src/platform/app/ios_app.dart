@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/common/global.dart';
-import 'package:portfolio/src/platform/app/adaptive_app.dart';
+import 'package:portfolio/src/common/platform.dart';
+import 'package:portfolio/src/platform/app_adaptive.dart';
 
 class IosApp extends AppInterface {
   IosApp({super.key, required super.ref});

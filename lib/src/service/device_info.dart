@@ -1,6 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/src/common/global.dart';
+import 'package:portfolio/src/common/platform.dart';
 
 abstract class KDeviceInfo {
   static final _i = DeviceInfoPlugin();

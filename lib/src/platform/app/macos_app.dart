@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:macos_ui/macos_ui.dart' as m;
-import 'package:portfolio/src/platform/app/adaptive_app.dart';
+import 'package:portfolio/src/platform/app_adaptive.dart';
 
 class MacosApp extends AppInterface {
   MacosApp({super.key, required super.ref});

@@ -2,7 +2,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'package:portfolio/src/common/utils.dart';
 import 'package:portfolio/src/entity/base_entity.dart';
+import 'package:portfolio/src/entity/cache_keys_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:portfolio/src/service/service_locator.dart';
 
@@ -10,31 +12,33 @@ abstract class CacheApi<P> {
   const CacheApi(this.provider);
 
   final P provider;
-  FutureOr<bool> remove(String key);
   FutureOr<bool> eraseDatabase();
-  FutureOr<bool> exist(String key);
-  FutureOr<T?> get<T>(String key, T Function(JsonData json) fromJson);
-  FutureOr<bool> set(String key, JsonData value);
+  FutureOr<bool> exist(CacheKeyEntity key);
+  FutureOr<bool> remove(CacheKeyEntity key);
+  FutureOr<bool> set(CacheKeyEntity key, JsonData value);
+  FutureOr<T?> get<T>(CacheKeyEntity key, T Function(JsonData json) fromJson);
 }
 
 class CacheManager extends CacheApi<SharedPreferencesAsync> {
   const CacheManager(super.provider);
 
   @override
-  Future<bool> remove(String key) => handleAsync(() => provider.remove(key));
+  Future<bool> remove(CacheKeyEntity key) async =>
+      Utils.boolTryCatch(provider.remove(key.name));
 
   @override
-  Future<bool> eraseDatabase() => handleAsync(() => provider.clear());
+  Future<bool> eraseDatabase() async => Utils.boolTryCatch(provider.clear());
 
   @override
-  Future<bool> exist(String key) =>
-      handleAsync(() => provider.containsKey(key));
+  Future<bool> exist(CacheKeyEntity key) async =>
+      Utils.boolTryCatch(provider.containsKey(key.name));
 
   @override
-  Future<T?> get<T>(String key, T Function(JsonData json) fromJson) async {
+  Future<T?> get<T>(
+      CacheKeyEntity key, T Function(JsonData json) fromJson) async {
     try {
-      final cache = await provider.getString(key);
-      return cache == null
+      final cache = await provider.getString(key.name);
+      return (cache == null || cache.isEmpty)
           ? null
           : ServiceLocator.worker.send(() => fromJson(jsonDecode(cache)));
     } catch (e, st) {
@@ -44,17 +48,6 @@ class CacheManager extends CacheApi<SharedPreferencesAsync> {
   }
 
   @override
-  Future<bool> set(String key, JsonData value) =>
-      handleAsync(() => provider.setString(key, value.toString()));
-
-  Future<bool> handleAsync(Future Function() fun) async {
-    try {
-      if (fun is Future<bool> Function()) return await fun();
-      await fun();
-      return true;
-    } catch (e, st) {
-      log('Error', name: '$runtimeType', error: e, stackTrace: st);
-      return false;
-    }
-  }
+  Future<bool> set(CacheKeyEntity key, JsonData value) async =>
+      Utils.boolTryCatch(provider.setString(key.name, '$value'));
 }

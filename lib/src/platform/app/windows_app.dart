@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:portfolio/src/platform/app/adaptive_app.dart';
+import 'package:portfolio/src/platform/app_adaptive.dart';
 // import 'package:window_manager/window_manager.dart';
 
 class WindowsApp extends AppInterface {

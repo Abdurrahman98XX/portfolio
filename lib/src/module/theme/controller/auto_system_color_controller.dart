@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/src/common/platform.dart';
 import 'package:portfolio/src/module/theme/controller/color_source_notifier.dart';
 import 'package:system_theme/system_theme.dart';
-import 'package:portfolio/src/common/global.dart';
 import 'package:portfolio/src/entity/base_entity.dart';
 
 final autoSystemColorProvider = StreamProvider.family<Color, bool>(
