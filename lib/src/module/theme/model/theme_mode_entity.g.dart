@@ -14,24 +14,21 @@ ThemeModeEntity _$ThemeModeEntityFromJson(Map<String, dynamic> json) =>
         $checkKeys(
           json,
           allowedKeys: const [
-            'who',
             'type',
             'name',
             'id',
             'vId',
             'createdAt',
             'modifiedAt',
+            'who',
             'themeMode'
           ],
         );
         final val = ThemeModeEntity(
-          who: $checkedConvert(
-              'who',
-              (v) => v == null
-                  ? null
-                  : WhoEntity.fromJson(v as Map<String, dynamic>)),
           id: $checkedConvert('id', (v) => v as String),
           vId: $checkedConvert('vId', (v) => v as String),
+          who: $checkedConvert(
+              'who', (v) => WhoEntity.fromJson(v as Map<String, dynamic>)),
           name: $checkedConvert('name', (v) => v as String),
           type: $checkedConvert('type', (v) => v as String),
           themeMode: $checkedConvert(
@@ -51,13 +48,13 @@ ThemeModeEntity _$ThemeModeEntityFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ThemeModeEntityToJson(ThemeModeEntity instance) =>
     <String, dynamic>{
-      'who': instance.who?.toJson(),
       'type': instance.type,
       'name': instance.name,
       'id': instance.id,
       'vId': instance.vId,
       'createdAt': const EpochDateTimeConverter().toJson(instance.createdAt),
       'modifiedAt': const EpochDateTimeConverter().toJson(instance.modifiedAt),
+      'who': instance.who.toJson(),
       'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
     };
 

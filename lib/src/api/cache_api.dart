@@ -2,7 +2,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:portfolio/src/common/utils.dart';
 import 'package:portfolio/src/entity/base_entity.dart';
 import 'package:portfolio/src/entity/cache_keys_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,15 +22,20 @@ class CacheManager extends CacheApi<SharedPreferencesAsync> {
   const CacheManager(super.provider);
 
   @override
-  Future<bool> remove(CacheKeyEntity key) async =>
-      Utils.boolTryCatch(provider.remove(key.name));
+  Future<bool> remove(CacheKeyEntity key) async {
+    await provider.remove(key.name);
+    return true;
+  }
 
   @override
-  Future<bool> eraseDatabase() async => Utils.boolTryCatch(provider.clear());
+  Future<bool> eraseDatabase() async {
+    await provider.clear();
+    return true;
+  }
 
   @override
   Future<bool> exist(CacheKeyEntity key) async =>
-      Utils.boolTryCatch(provider.containsKey(key.name));
+      provider.containsKey(key.name);
 
   @override
   Future<T?> get<T>(
@@ -48,6 +52,8 @@ class CacheManager extends CacheApi<SharedPreferencesAsync> {
   }
 
   @override
-  Future<bool> set(CacheKeyEntity key, JsonData value) async =>
-      Utils.boolTryCatch(provider.setString(key.name, '$value'));
+  Future<bool> set(CacheKeyEntity key, JsonData value) async {
+    await provider.setString(key.name, '$value');
+    return true;
+  }
 }

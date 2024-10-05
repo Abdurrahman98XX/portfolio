@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/src/common/platform.dart';
-import 'package:portfolio/src/module/theme/controller/color_source_notifier.dart';
+import 'package:portfolio/src/module/theme/controller/app_color_notifier.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:portfolio/src/entity/base_entity.dart';
 
@@ -11,14 +11,14 @@ final autoSystemColorProvider = StreamProvider.family<Color, bool>(
   (ref, listenColorChange) async* {
     final autoColorAbilityWatcher = ref.watch(autoSystemColorAbilityProvider);
     final colorSourceWatcher = ref.watch(
-      ColorSourceNotifier.provider.select((c) => c.eWho != WHO.user),
+      AppColorNotifier.provider.select((c) => c.who.whoEnum != WHOEnum.user),
     );
     if (autoColorAbilityWatcher && colorSourceWatcher) {
       if (KPlatform.isWindows) {
         yield* SystemTheme.onChange.map((c) => c.accent);
       } else {
-        await SystemTheme.accentColor.load();
         var old = SystemTheme.accentColor.accent;
+        await SystemTheme.accentColor.load();
         yield old;
         while (listenColorChange || kDebugMode) {
           await Future.delayed(const Duration(seconds: 1));

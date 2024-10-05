@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/src/module/theme/model/user_color_entity.dart';
+import 'package:portfolio/src/module/theme/model/app_color_entity.dart';
 
-class UserColorController extends Notifier<UserColorEntity> {
-  static final provider =
-      NotifierProvider<UserColorController, UserColorEntity>(
-    UserColorController.new,
-    name: 'UserColorController',
+class AppColorNotifier extends Notifier<AppColorEntity> {
+  static final provider = NotifierProvider<AppColorNotifier, AppColorEntity>(
+    AppColorNotifier.new,
+    name: 'AppColorNotifier',
   );
   @override
-  UserColorEntity build() {
-    return UserColorEntity(
+  AppColorEntity build() {
+    return AppColorEntity(
       userColor: Colors.blue,
       modifiedAt: DateTime.now(),
       createdAt: DateTime.now(),
@@ -22,7 +21,7 @@ class UserColorController extends Notifier<UserColorEntity> {
   }
 
   /// returns old state when updating completes
-  UserColorEntity? update(Color color) {
+  AppColorEntity? update(Color color) {
     if (state.userColor == color) return null;
     final prev = state;
     state = state.copyWith(userColor: color, modifiedAt: DateTime.now());

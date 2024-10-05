@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:portfolio/src/entity/who_entity.dart';
 import 'package:portfolio/src/common/json_conversion.dart';
+import 'package:portfolio/src/entity/who_entity.dart';
 
 part 'base_entity.g.dart';
 
@@ -16,29 +16,23 @@ part 'base_entity.g.dart';
   ignoreUnannotated: true,
   converters: converters,
 )
-abstract class BaseEntity extends Equatable {
-  const BaseEntity({
-    required this.who,
-    required this.name,
+abstract class AbstractBaseEntity extends Equatable {
+  const AbstractBaseEntity({
     required this.id,
     required this.vId,
+    required this.name,
     required this.type,
     required this.createdAt,
     required this.modifiedAt,
   });
-  BaseEntity copyWith({
-    String? name,
+  AbstractBaseEntity copyWith({
     String? id,
     String? vId,
     String? type,
+    String? name,
     DateTime? createdAt,
     DateTime? modifiedAt,
-    WhoEntity? who,
   });
-
-  /// Who created the objects
-  @JsonKey(includeToJson: true)
-  final WhoEntity? who;
 
   /// The type of the entity
   @JsonKey(includeToJson: true)
@@ -67,7 +61,7 @@ abstract class BaseEntity extends Equatable {
   @override
   List get props => [..._base, ...equality];
 
-  List get _base => [name, id, vId, type, createdAt, modifiedAt, who];
+  List get _base => [name, id, vId, type, createdAt, modifiedAt];
 
   /// define every property that is not in the [props] list
   ///
@@ -75,11 +69,55 @@ abstract class BaseEntity extends Equatable {
   List get equality;
 
   /// serializes object to a map (json like)
-  Map<String, dynamic> toJson() => _$BaseEntityToJson(this);
+  JsonData toJson() => _$AbstractBaseEntityToJson(this);
+}
+
+@JsonSerializable(converters: converters)
+class BaseEntity extends AbstractBaseEntity {
+  const BaseEntity({
+    required this.who,
+    required super.id,
+    required super.vId,
+    required super.name,
+    required super.type,
+    required super.createdAt,
+    required super.modifiedAt,
+  });
+
+  final WhoEntity who;
+
+  @override
+  BaseEntity copyWith({
+    String? id,
+    String? vId,
+    String? type,
+    String? name,
+    WhoEntity? who,
+    DateTime? createdAt,
+    DateTime? modifiedAt,
+  }) {
+    return BaseEntity(
+      id: id ?? this.id,
+      who: who ?? this.who,
+      vId: vId ?? this.vId,
+      name: name ?? this.name,
+      type: type ?? this.type,
+      createdAt: createdAt ?? this.createdAt,
+      modifiedAt: modifiedAt ?? this.modifiedAt,
+    );
+  }
+
+  @override
+  List get equality => [who];
+
+  factory BaseEntity.fromJson(JsonData json) => _$BaseEntityFromJson(json);
+
+  @override
+  JsonData toJson() => _$BaseEntityToJson(this);
 }
 
 enum Source { user, system }
 
-enum WHO { user, defaults, system }
+enum WHOEnum { user, defaults, system }
 
 typedef JsonData = Map<String, dynamic>;

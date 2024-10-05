@@ -8,9 +8,9 @@ part 'theme_mode_entity.g.dart';
 @JsonSerializable(converters: converters)
 class ThemeModeEntity extends BaseEntity {
   const ThemeModeEntity({
-    super.who,
     required super.id,
     required super.vId,
+    required super.who,
     required super.name,
     required super.type,
     required this.themeMode,
@@ -33,14 +33,15 @@ class ThemeModeEntity extends BaseEntity {
     String? name,
     String? type,
     WhoEntity? who,
+    WhoEntity? whoEnum,
     DateTime? createdAt,
     ThemeMode? themeMode,
     DateTime? modifiedAt,
   }) {
     return ThemeModeEntity(
       id: id ?? this.id,
-      who: who ?? this.who,
       vId: vId ?? this.vId,
+      who: who ?? this.who,
       name: name ?? this.name,
       type: type ?? this.type,
       themeMode: themeMode ?? this.themeMode,

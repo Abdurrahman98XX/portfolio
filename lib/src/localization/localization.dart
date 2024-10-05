@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/src/common/utils.dart';
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -16,9 +15,13 @@ final languageStateProvider = StateProvider<String?>(
 
 final localizationProvider = Provider<Locale?>(
   name: 'localizationProvider',
-  (ref) => Utils.tryOrNull(
-    AppLocalizations.supportedLocales.firstWhere(
-      (locale) => locale.languageCode == ref.watch(languageStateProvider),
-    ),
-  ),
+  (ref) {
+    try {
+      return AppLocalizations.supportedLocales.firstWhere(
+        (locale) => locale.languageCode == ref.watch(languageStateProvider),
+      );
+    } catch (e) {
+      return null;
+    }
+  },
 );

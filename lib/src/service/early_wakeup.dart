@@ -16,8 +16,6 @@ final earlyWakeuprProvider = FutureProvider<void>(
   (ref) async {
     WidgetsFlutterBinding.ensureInitialized();
     deviceInfoProvider.overrideWithValue(await KDeviceInfo.instance);
-    // TODO: remove this!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    await ServiceLocator.cache.eraseDatabase();
     // services initialization
     if (KPlatform.isMacOS) await const MacosWindowUtilsConfig().apply();
     if (KPlatform.isLinux) await YaruWindowTitleBar.ensureInitialized();

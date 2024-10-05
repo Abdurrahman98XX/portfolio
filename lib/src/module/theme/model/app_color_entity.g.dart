@@ -1,37 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_color_entity.dart';
+part of 'app_color_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserColorEntity _$UserColorEntityFromJson(Map<String, dynamic> json) =>
+AppColorEntity _$AppColorEntityFromJson(Map<String, dynamic> json) =>
     $checkedCreate(
-      'UserColorEntity',
+      'AppColorEntity',
       json,
       ($checkedConvert) {
         $checkKeys(
           json,
           allowedKeys: const [
-            'who',
             'type',
             'name',
             'id',
             'vId',
             'createdAt',
             'modifiedAt',
+            'who',
             'userColor'
           ],
         );
-        final val = UserColorEntity(
-          who: $checkedConvert(
-              'who',
-              (v) => v == null
-                  ? null
-                  : WhoEntity.fromJson(v as Map<String, dynamic>)),
+        final val = AppColorEntity(
           id: $checkedConvert('id', (v) => v as String),
           vId: $checkedConvert('vId', (v) => v as String),
+          who: $checkedConvert(
+              'who', (v) => WhoEntity.fromJson(v as Map<String, dynamic>)),
           name: $checkedConvert('name', (v) => v as String),
           type: $checkedConvert('type', (v) => v as String),
           userColor: $checkedConvert('userColor',
@@ -49,14 +46,14 @@ UserColorEntity _$UserColorEntityFromJson(Map<String, dynamic> json) =>
       },
     );
 
-Map<String, dynamic> _$UserColorEntityToJson(UserColorEntity instance) =>
+Map<String, dynamic> _$AppColorEntityToJson(AppColorEntity instance) =>
     <String, dynamic>{
-      'who': instance.who?.toJson(),
       'type': instance.type,
       'name': instance.name,
       'id': instance.id,
       'vId': instance.vId,
       'createdAt': const EpochDateTimeConverter().toJson(instance.createdAt),
       'modifiedAt': const EpochDateTimeConverter().toJson(instance.modifiedAt),
+      'who': instance.who.toJson(),
       'userColor': const ColorConverter().toJson(instance.userColor),
     };

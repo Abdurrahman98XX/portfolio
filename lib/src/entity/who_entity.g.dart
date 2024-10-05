@@ -13,27 +13,22 @@ WhoEntity _$WhoEntityFromJson(Map<String, dynamic> json) => $checkedCreate(
         $checkKeys(
           json,
           allowedKeys: const [
-            'who',
             'type',
             'name',
             'id',
             'vId',
             'createdAt',
             'modifiedAt',
-            'eWho'
+            'whoEnum'
           ],
         );
         final val = WhoEntity(
-          who: $checkedConvert(
-              'who',
-              (v) => v == null
-                  ? null
-                  : WhoEntity.fromJson(v as Map<String, dynamic>)),
           id: $checkedConvert('id', (v) => v as String),
           vId: $checkedConvert('vId', (v) => v as String),
-          eWho: $checkedConvert('eWho', (v) => $enumDecode(_$WHOEnumMap, v)),
           name: $checkedConvert('name', (v) => v as String),
           type: $checkedConvert('type', (v) => v as String),
+          whoEnum: $checkedConvert(
+              'whoEnum', (v) => $enumDecode(_$WHOEnumEnumMap, v)),
           createdAt: $checkedConvert(
               'createdAt',
               (v) =>
@@ -48,18 +43,17 @@ WhoEntity _$WhoEntityFromJson(Map<String, dynamic> json) => $checkedCreate(
     );
 
 Map<String, dynamic> _$WhoEntityToJson(WhoEntity instance) => <String, dynamic>{
-      'who': instance.who?.toJson(),
       'type': instance.type,
       'name': instance.name,
       'id': instance.id,
       'vId': instance.vId,
       'createdAt': const EpochDateTimeConverter().toJson(instance.createdAt),
       'modifiedAt': const EpochDateTimeConverter().toJson(instance.modifiedAt),
-      'eWho': _$WHOEnumMap[instance.eWho]!,
+      'whoEnum': _$WHOEnumEnumMap[instance.whoEnum]!,
     };
 
-const _$WHOEnumMap = {
-  WHO.user: 'user',
-  WHO.defaults: 'defaults',
-  WHO.system: 'system',
+const _$WHOEnumEnumMap = {
+  WHOEnum.user: 'user',
+  WHOEnum.defaults: 'defaults',
+  WHOEnum.system: 'system',
 };

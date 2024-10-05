@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/src/common/global.dart';
-import 'package:portfolio/src/common/utils.dart';
 import 'package:portfolio/src/localization/localization.dart';
 import 'package:portfolio/src/module/theme/controller/theme_mode_notifier.dart';
 import 'package:portfolio/src/platform/app/android_app.dart';
@@ -28,19 +27,15 @@ abstract class AppInterface extends StatelessWidget {
   final localizationsDelegates = AppLocalizations.localizationsDelegates;
 }
 
-const _v = String.fromEnvironment('os');
-final _os = Utils.tryOrNull(TargetPlatform.values.byName(_v));
-
 class AdaptiveApp extends StatelessWidget {
   const AdaptiveApp({super.key});
   @override
   Widget build(BuildContext context) {
-    final TargetPlatform? usePlatform = _os;
     return Consumer(
       key: key,
       builder: (context, ref, child) {
         ref.read(earlyWakeuprProvider);
-        return switch (usePlatform ?? defaultTargetPlatform) {
+        return switch (defaultTargetPlatform) {
           TargetPlatform.iOS => IosApp(ref: ref),
           TargetPlatform.macOS => MacosApp(ref: ref),
           TargetPlatform.android => AndroidApp(ref: ref),

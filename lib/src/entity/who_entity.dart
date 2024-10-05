@@ -4,19 +4,18 @@ import 'package:portfolio/src/common/json_conversion.dart';
 part 'who_entity.g.dart';
 
 @JsonSerializable(converters: converters)
-class WhoEntity extends BaseEntity {
+class WhoEntity extends AbstractBaseEntity {
   const WhoEntity({
-    super.who,
     required super.id,
     required super.vId,
-    required this.eWho,
     required super.name,
     required super.type,
+    required this.whoEnum,
     required super.createdAt,
     required super.modifiedAt,
   });
 
-  final WHO eWho;
+  final WHOEnum whoEnum;
 
   factory WhoEntity.fromJson(JsonData json) => _$WhoEntityFromJson(json);
 
@@ -25,27 +24,25 @@ class WhoEntity extends BaseEntity {
 
   @override
   WhoEntity copyWith({
-    WHO? eWho,
     String? id,
     String? vId,
     String? name,
     String? type,
-    WhoEntity? who,
+    WHOEnum? whoEnum,
     DateTime? createdAt,
     DateTime? modifiedAt,
   }) {
     return WhoEntity(
       id: id ?? this.id,
-      who: who ?? this.who,
       vId: vId ?? this.vId,
-      eWho: eWho ?? this.eWho,
       name: name ?? this.name,
       type: type ?? this.type,
+      whoEnum: whoEnum ?? this.whoEnum,
       createdAt: createdAt ?? this.createdAt,
       modifiedAt: modifiedAt ?? this.modifiedAt,
     );
   }
 
   @override
-  List get equality => [eWho];
+  List get equality => [whoEnum];
 }

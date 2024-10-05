@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/src/common/platform.dart';
 import 'package:portfolio/src/entity/cache_keys_entity.dart';
 import 'package:portfolio/src/service/service_locator.dart';
 
@@ -50,7 +49,7 @@ class _OnboardingModalState extends ConsumerState<OnboardingModal>
   }
 
   void _handlePageViewChanged(int currentPageIndex) {
-    if (!_isOnDesktopAndWeb) return;
+    if (!_showPageIndicator) return;
     _tabController.index = currentPageIndex;
     setState(() => _currentPageIndex = currentPageIndex);
   }
@@ -64,10 +63,11 @@ class _OnboardingModalState extends ConsumerState<OnboardingModal>
     );
   }
 
-  bool get _isOnDesktopAndWeb {
-    if (KPlatform.isBrowser) return true;
-    if (KPlatform.isDesktop) return true;
-    return false;
+  bool get _showPageIndicator {
+    // if (KPlatform.isBrowser) return true;
+    // if (KPlatform.isDesktop) return true;
+    // return false;
+    return true;
   }
 
   @override
@@ -84,7 +84,7 @@ class _OnboardingModalState extends ConsumerState<OnboardingModal>
           tabController: _tabController,
           currentPageIndex: _currentPageIndex,
           onUpdateCurrentPageIndex: _updateCurrentPageIndex,
-          isOnDesktopAndWeb: _isOnDesktopAndWeb,
+          isOnDesktopAndWeb: _showPageIndicator,
         ),
       ],
     );
@@ -109,6 +109,7 @@ class PageIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     if (!isOnDesktopAndWeb) return const SizedBox.shrink();
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    print(tabController.length);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(

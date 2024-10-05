@@ -1,18 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:crypto/crypto.dart';
 import 'package:convert/convert.dart';
 
 abstract interface class Utils {
-  static T? tryOrNull<T>(T? value) {
-    try {
-      return value;
-    } catch (e) {
-      return null;
-    }
-  }
-
   static FutureOr<({T result, Duration duration})> timeElapsed<T>(
       FutureOr<T> Function() function) async {
     final start = DateTime.now();
@@ -31,23 +22,5 @@ abstract interface class Utils {
     final digest = output.events.single;
     if (check != null) return (value: digest, isValid: '$digest' == check);
     return (value: digest, isValid: null);
-  }
-
-  static FutureOr<bool> boolTryCatch(value) async {
-    try {
-      if (value is Future<bool> Function()) {
-        return await value();
-      } else if (value is Future<bool>) {
-        return await value;
-      } else if (value is Function) {
-        await value();
-      } else {
-        await value;
-      }
-      return true;
-    } catch (e, st) {
-      log('Error', error: e, stackTrace: st);
-      return false;
-    }
   }
 }
