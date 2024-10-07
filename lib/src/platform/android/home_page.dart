@@ -9,14 +9,14 @@ class HomePage extends ConsumerWidget {
   static final route = GoRoute(
     path: '/',
     name: 'home',
-    builder: (context, state) => HomePage(),
+    builder: (context, state) => const HomePage(),
   );
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     OnboardingModal.showModal(context);
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.welcome)),
-      body: Center(
+      body: const Center(
         child: ElevatedButton(
           onPressed: null,
           child: Text('data'),

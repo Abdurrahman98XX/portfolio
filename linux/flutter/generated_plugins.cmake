@@ -3,6 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  device_region
+  devicelocale
   gtk
   screen_retriever
   system_theme

@@ -3,6 +3,9 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  connectivity_plus
+  device_region
+  flutter_timezone
   screen_retriever
   share_plus
   system_theme

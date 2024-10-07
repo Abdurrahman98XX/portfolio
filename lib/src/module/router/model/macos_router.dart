@@ -1,11 +1,11 @@
 import 'package:portfolio/src/common/global.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:portfolio/src/entity/redirect_router_entity.dart';
+import 'package:portfolio/src/module/router/model/redirect_router_entity.dart';
 import 'package:portfolio/src/platform/android/home_page.dart';
 
-final windowsRouterProvider = Provider<GoRouter>(
-  name: 'windowsRouterProvider',
+final macosRouterProvider = Provider<GoRouter>(
+  name: 'macosRouterProvider',
   (ref) {
     // ref.listen(
     //   provider,

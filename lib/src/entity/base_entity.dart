@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:portfolio/src/common/json_conversion.dart';
+import 'package:portfolio/src/entity/json_conversion.dart';
 import 'package:portfolio/src/entity/who_entity.dart';
 
 part 'base_entity.g.dart';
@@ -115,8 +115,6 @@ class BaseEntity extends AbstractBaseEntity {
   @override
   JsonData toJson() => _$BaseEntityToJson(this);
 }
-
-enum Source { user, system }
 
 enum WHOEnum { user, defaults, system }
 

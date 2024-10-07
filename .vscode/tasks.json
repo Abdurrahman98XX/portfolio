@@ -4,6 +4,11 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "screen share",
+      "type": "shell",
+      "command": "scrcpy -w -b8m --no-audio -m1024  --video-codec=h265 --video-encoder='OMX.qcom.video.encoder.hevc.cq' --max-fps=60 -s 19ef4297"
+    },
+    {
       "label": "build_runner",
       "type": "shell",
       "command": "dart run build_runner watch -d"

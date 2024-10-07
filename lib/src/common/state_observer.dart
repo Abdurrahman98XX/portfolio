@@ -6,7 +6,7 @@ class StateObserver implements ProviderObserver {
   void didAddProvider(ProviderBase<Object?> provider, Object? value,
       ProviderContainer container) {
     log(
-      'started 🆙: $value',
+      'Provider started 🆙: $value',
       name: '${provider.name}',
       time: DateTime.now(),
     );
@@ -15,14 +15,14 @@ class StateObserver implements ProviderObserver {
   @override
   void didDisposeProvider(
       ProviderBase<Object?> provider, ProviderContainer container) {
-    log('closed ❌', name: '${provider.name}', time: DateTime.now());
+    log('Provider closed ❌', name: '${provider.name}', time: DateTime.now());
   }
 
   @override
   void didUpdateProvider(ProviderBase<Object?> provider, Object? was,
       Object? now, ProviderContainer container) {
     log(
-      'updated: ♻️\nwas: $was\nnow: $now',
+      'Provider updated: ♻️\nwas: $was\nnow: $now',
       name: '${provider.name}',
       time: DateTime.now(),
     );
@@ -32,7 +32,7 @@ class StateObserver implements ProviderObserver {
   void providerDidFail(ProviderBase<Object?> provider, Object error,
       StackTrace stackTrace, ProviderContainer container) {
     log(
-      'error 🚫',
+      'Provider error 🚫',
       name: '${provider.name}',
       time: DateTime.now(),
       stackTrace: stackTrace,

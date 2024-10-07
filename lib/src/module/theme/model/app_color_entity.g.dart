@@ -21,7 +21,7 @@ AppColorEntity _$AppColorEntityFromJson(Map<String, dynamic> json) =>
             'createdAt',
             'modifiedAt',
             'who',
-            'userColor'
+            'appColor'
           ],
         );
         final val = AppColorEntity(
@@ -31,7 +31,7 @@ AppColorEntity _$AppColorEntityFromJson(Map<String, dynamic> json) =>
               'who', (v) => WhoEntity.fromJson(v as Map<String, dynamic>)),
           name: $checkedConvert('name', (v) => v as String),
           type: $checkedConvert('type', (v) => v as String),
-          userColor: $checkedConvert('userColor',
+          appColor: $checkedConvert('appColor',
               (v) => const ColorConverter().fromJson((v as num).toInt())),
           createdAt: $checkedConvert(
               'createdAt',
@@ -55,5 +55,5 @@ Map<String, dynamic> _$AppColorEntityToJson(AppColorEntity instance) =>
       'createdAt': const EpochDateTimeConverter().toJson(instance.createdAt),
       'modifiedAt': const EpochDateTimeConverter().toJson(instance.modifiedAt),
       'who': instance.who.toJson(),
-      'userColor': const ColorConverter().toJson(instance.userColor),
+      'appColor': const ColorConverter().toJson(instance.appColor),
     };

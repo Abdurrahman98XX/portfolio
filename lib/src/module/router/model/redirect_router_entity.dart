@@ -5,7 +5,7 @@ class RedirectRouterEntity extends Equatable {
   const RedirectRouterEntity({required this.isInit});
 
   static final notifier = ValueNotifier<RedirectRouterEntity>(
-    RedirectRouterEntity(isInit: false),
+    const RedirectRouterEntity(isInit: false),
   );
 
   final bool isInit;

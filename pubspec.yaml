@@ -35,17 +35,33 @@ dependencies:
   cupertino_icons: ^1.0.6
 
   # state and locator
-  get_it: ^8.0.0
   rxdart: ^0.28.0
-  go_router: ^14.2.3
   flutter_riverpod: ^2.5.1
 
-  # storage and sharing
+  # services
+  go_router: ^14.2.3
+  flutter_fgbg: ^0.6.0
+  shared_preferences: ^2.3.2
+  back_button_interceptor: ^7.0.3
+  flutter_background_service: ^5.0.10
+
+  # device_info
+  appcheck: ^1.5.2
+  safe_device: ^1.1.9
+  devicelocale: ^0.8.1
+  device_region: ^1.4.0
+  flutter_timezone: ^3.0.1
+  device_info_plus: ^10.1.2
+  connectivity_plus: ^6.0.5
+
+  # plugins
   share_plus: ^10.0.2
   url_launcher: ^6.3.0
   path_provider: ^2.1.4
-  device_info_plus: ^10.1.2
-  shared_preferences: ^2.3.2
+  no_screenshot: ^1.0.0-beta.2
+  flutter_local_notifications: ^17.2.3
+  package_info_plus: ^8.0.2
+  get_it: ^8.0.0
 
 dev_dependencies:
   flutter_test:

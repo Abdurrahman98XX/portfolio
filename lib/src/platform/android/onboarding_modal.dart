@@ -8,23 +8,24 @@ class OnboardingModal extends ConsumerStatefulWidget {
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _OnboardingModalState();
-  static Future<T?> showModal<T>(BuildContext context) async {
-    final val = await ServiceLocator.cache.provider
-        .getBool(CacheKeysEntity().onboardDone.name);
-    if (val ?? false) return null;
-    return await showModalBottomSheet(
+  static Future<void> showModal(BuildContext context) async {
+    final val = await ServiceLocator.cache.provider.getBool(
+      CacheKeys.onboardDone.name,
+    );
+    if (val ?? false) return;
+    return showModalBottomSheet(
       context: context,
       useSafeArea: true,
       isDismissible: false,
-      builder: (context) => OnboardingModal(),
+      builder: (context) => const OnboardingModal(),
     );
   }
 }
 
 final _pages = [
-  Center(child: Text('First Page')),
-  Center(child: Text('Second Page')),
-  Center(child: Text('Third Page')),
+  const Center(child: Text('First Page')),
+  const Center(child: Text('Second Page')),
+  const Center(child: Text('Third Page')),
 ];
 
 class _OnboardingModalState extends ConsumerState<OnboardingModal>
@@ -109,7 +110,6 @@ class PageIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     if (!isOnDesktopAndWeb) return const SizedBox.shrink();
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    print(tabController.length);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(

@@ -11,12 +11,12 @@ class MacosApp extends AppInterface {
       locale: locale,
       actions: actions,
       themeMode: themeMode,
+      shortcuts: shortcuts,
       // routerConfig: routerConfig,
       theme: m.MacosThemeData.light(),
       onGenerateTitle: onGenerateTitle,
       supportedLocales: supportedLocales,
       darkTheme: m.MacosThemeData.dark(),
-      shortcuts: {...?shortcuts as Map?},
       restorationScopeId: restorationScopeId,
       localizationsDelegates: localizationsDelegates,
     );

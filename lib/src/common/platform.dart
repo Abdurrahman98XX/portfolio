@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 abstract interface class KPlatform {
   static const isBrowser = kIsWeb || kIsWasm;
+  static const isNative = !isBrowser;
   static final isMobile = isAndroid || isIOS;
   static final isDesktop = isMacOS || isWindows || isLinux;
   static final isApple = isMacOS || isIOS;

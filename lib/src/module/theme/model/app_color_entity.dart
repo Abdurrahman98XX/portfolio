@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:portfolio/src/entity/who_entity.dart';
-import 'package:portfolio/src/common/json_conversion.dart';
+import 'package:portfolio/src/entity/json_conversion.dart';
 import 'package:portfolio/src/entity/base_entity.dart';
 part 'app_color_entity.g.dart';
 
@@ -13,12 +13,12 @@ class AppColorEntity extends BaseEntity {
     required super.who,
     required super.name,
     required super.type,
-    required this.userColor,
+    required this.appColor,
     required super.createdAt,
     required super.modifiedAt,
   });
 
-  final Color userColor;
+  final Color appColor;
 
   factory AppColorEntity.fromJson(JsonData json) =>
       _$AppColorEntityFromJson(json);
@@ -33,7 +33,7 @@ class AppColorEntity extends BaseEntity {
     String? name,
     String? type,
     WhoEntity? who,
-    Color? userColor,
+    Color? appColor,
     DateTime? createdAt,
     DateTime? modifiedAt,
   }) {
@@ -43,12 +43,12 @@ class AppColorEntity extends BaseEntity {
       who: who ?? this.who,
       name: name ?? this.name,
       type: type ?? this.type,
-      userColor: userColor ?? this.userColor,
+      appColor: appColor ?? this.appColor,
       createdAt: createdAt ?? this.createdAt,
       modifiedAt: modifiedAt ?? this.modifiedAt,
     );
   }
 
   @override
-  List get equality => [userColor];
+  List get equality => [appColor];
 }

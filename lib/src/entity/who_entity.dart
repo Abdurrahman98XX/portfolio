@@ -1,6 +1,6 @@
 import 'package:portfolio/src/entity/base_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:portfolio/src/common/json_conversion.dart';
+import 'package:portfolio/src/entity/json_conversion.dart';
 part 'who_entity.g.dart';
 
 @JsonSerializable(converters: converters)

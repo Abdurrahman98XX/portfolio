@@ -10,9 +10,9 @@ final autoSystemColorProvider = StreamProvider.family<Color, bool>(
   name: 'autoSystemColorProvider',
   (ref, listenColorChange) async* {
     final autoColorAbilityWatcher = ref.watch(autoSystemColorAbilityProvider);
-    final colorSourceWatcher = ref.watch(
-      AppColorNotifier.provider.select((c) => c.who.whoEnum != WHOEnum.user),
-    );
+    final colorSourceWatcher = ref.watch(AppColorNotifier.provider.select(
+      (c) => c.valueOrNull?.who.whoEnum != WHOEnum.user,
+    ));
     if (autoColorAbilityWatcher && colorSourceWatcher) {
       if (KPlatform.isWindows) {
         yield* SystemTheme.onChange.map((c) => c.accent);
@@ -21,7 +21,7 @@ final autoSystemColorProvider = StreamProvider.family<Color, bool>(
         await SystemTheme.accentColor.load();
         yield old;
         while (listenColorChange || kDebugMode) {
-          await Future.delayed(const Duration(seconds: 1));
+          await Future<void>.delayed(const Duration(seconds: 1));
           await SystemTheme.accentColor.load();
           final color = SystemTheme.accentColor.accent;
           if (color.value != old.value) {

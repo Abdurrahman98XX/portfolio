@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/platform/app_adaptive.dart';
-import 'package:portfolio/src/platform/router/android_router.dart';
 
 class AndroidApp extends AppInterface {
   AndroidApp({super.key, required super.ref});
@@ -14,11 +13,11 @@ class AndroidApp extends AppInterface {
       darkTheme: darkTheme,
       shortcuts: shortcuts,
       themeMode: themeMode,
+      routerConfig: routerConfig,
       onGenerateTitle: onGenerateTitle,
       supportedLocales: supportedLocales,
       restorationScopeId: restorationScopeId,
       scaffoldMessengerKey: scaffoldMessengerKey,
-      routerConfig: ref.watch(androidRouterProvider),
       localizationsDelegates: localizationsDelegates,
     );
   }
