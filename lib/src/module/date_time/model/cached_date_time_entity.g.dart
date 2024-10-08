@@ -22,7 +22,6 @@ CachedOnlineDateTimeEntity _$CachedOnlineDateTimeEntityFromJson(
             'datetime',
             'utc_datetime',
             'unixtime',
-            'local_unixtime',
             'raw_offset',
             'week_number',
             'dst',
@@ -34,8 +33,6 @@ CachedOnlineDateTimeEntity _$CachedOnlineDateTimeEntityFromJson(
           ],
         );
         final val = CachedOnlineDateTimeEntity(
-          localUnixtime:
-              $checkedConvert('local_unixtime', (v) => (v as num).toInt()),
           utcOffset: $checkedConvert('utc_offset', (v) => v as String),
           timezone: $checkedConvert('timezone', (v) => v as String),
           dayOfWeek: $checkedConvert('day_of_week', (v) => (v as num).toInt()),
@@ -55,7 +52,6 @@ CachedOnlineDateTimeEntity _$CachedOnlineDateTimeEntityFromJson(
         return val;
       },
       fieldKeyMap: const {
-        'localUnixtime': 'local_unixtime',
         'utcOffset': 'utc_offset',
         'dayOfWeek': 'day_of_week',
         'dayOfYear': 'day_of_year',
@@ -79,7 +75,6 @@ Map<String, dynamic> _$CachedOnlineDateTimeEntityToJson(
       'datetime': instance.datetime,
       'utc_datetime': instance.utcDatetime,
       'unixtime': instance.unixtime,
-      'local_unixtime': instance.localUnixtime,
       'raw_offset': instance.rawOffset,
       'week_number': instance.weekNumber,
       'dst': instance.dst,
@@ -98,13 +93,10 @@ CacheLocaldDateTimeEntity _$CacheLocaldDateTimeEntityFromJson(
       ($checkedConvert) {
         $checkKeys(
           json,
-          allowedKeys: const ['unixtime'],
+          allowedKeys: const ['epochTime'],
         );
         final val = CacheLocaldDateTimeEntity(
-          $checkedConvert(
-              'unixtime',
-              (v) =>
-                  const EpochDateTimeConverter().fromJson((v as num).toInt())),
+          $checkedConvert('epochTime', (v) => (v as num).toInt()),
         );
         return val;
       },
@@ -113,5 +105,5 @@ CacheLocaldDateTimeEntity _$CacheLocaldDateTimeEntityFromJson(
 Map<String, dynamic> _$CacheLocaldDateTimeEntityToJson(
         CacheLocaldDateTimeEntity instance) =>
     <String, dynamic>{
-      'unixtime': const EpochDateTimeConverter().toJson(instance.unixtime),
+      'epochTime': instance.epochTime,
     };

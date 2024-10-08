@@ -7,7 +7,6 @@ part 'cached_date_time_entity.g.dart';
 @JsonSerializable(converters: converters, fieldRename: FieldRename.snake)
 class CachedOnlineDateTimeEntity extends Equatable {
   const CachedOnlineDateTimeEntity({
-    required this.localUnixtime,
     required this.utcOffset,
     required this.timezone,
     required this.dayOfWeek,
@@ -45,8 +44,6 @@ class CachedOnlineDateTimeEntity extends Equatable {
 
   /// number of seconds since the Epoch
   final int unixtime;
-
-  final int localUnixtime;
 
   /// the difference in seconds between the current local time and the time in UTC, excluding any daylight saving difference (see dst_offset)
   final int rawOffset;
@@ -94,16 +91,15 @@ class CachedOnlineDateTimeEntity extends Equatable {
         dstFrom,
         dstUntil,
         clientIp,
-        localUnixtime,
       ];
 }
 
-@JsonSerializable(converters: converters, fieldRename: FieldRename.snake)
+@JsonSerializable(converters: converters)
 class CacheLocaldDateTimeEntity extends Equatable {
-  const CacheLocaldDateTimeEntity(this.unixtime);
-  final DateTime unixtime;
+  const CacheLocaldDateTimeEntity(this.epochTime);
+  final int epochTime;
   @override
-  List get props => [unixtime];
+  List get props => [epochTime];
   JsonData toJson() => _$CacheLocaldDateTimeEntityToJson(this);
   factory CacheLocaldDateTimeEntity.fromJson(JsonData json) =>
       _$CacheLocaldDateTimeEntityFromJson(json);
